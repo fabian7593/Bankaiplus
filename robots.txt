@@ -1,0 +1,27 @@
+# robots.txt para Tauro TV
+# Permite el rastreo completo del sitio
+
+User-agent: *
+Allow: /
+
+# Bloquear archivos innecesarios para SEO
+Disallow: /css/
+Disallow: /js/
+Disallow: /*.json$
+
+# Sitemap
+Sitemap: https://taurotv.com/sitemap.xml
+
+# Rastreadores específicos
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /images/
+
+User-agent: Bingbot
+Allow: /
+
+# Crawl delay para bots menos importantes
+User-agent: *
+Crawl-delay: 10

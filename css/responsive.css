@@ -1,0 +1,271 @@
+/**
+ * TAURO TV — RESPONSIVE
+ * Breakpoints:
+ *   1200px → Desktop grande
+ *    900px → Tablet / desktop pequeño
+ *    640px → Tablet pequeña / móvil grande
+ *    400px → Móvil pequeño
+ */
+
+/* ── 1200px: ajustes finos de desktop ── */
+@media (max-width: 1200px) {
+  nav { padding: 18px 32px; }
+  .hero { padding: 88px 32px 40px; gap: 24px; }
+  .section { padding: 80px 32px; }
+  footer { padding: 60px 32px 30px; }
+  .cta-section { padding: 80px 32px; }
+}
+
+/* ── 900px: tablet / menú hamburger ── */
+@media (max-width: 900px) {
+  /* Nav */
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+
+  /* Hero — layout apilado en tablet/mobile:
+     texto arriba, TV abajo, cada uno full-width */
+  .hero {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 100px 24px 40px;
+    min-height: auto;
+    gap: 32px;
+  }
+  .hero-content {
+    flex: none;
+    max-width: 100%;
+    padding-bottom: 0;
+  }
+
+  /* TV: full-width debajo del texto */
+  .hero-visual {
+    flex: none;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* El mockup toma todo el ancho — las cards flotantes quedan dentro */
+  .tv-mockup {
+    padding: 0 52px; /* espacio más pequeño para las cards en mobile */
+  }
+
+  .hero h1 { font-size: clamp(2.5rem, 10vw, 4rem); }
+  .hero h1 span { font-size: clamp(1.8rem, 7vw, 3rem); }
+
+  /* Stats: 2x2 en tablet */
+  .hero-stats {
+    grid-template-columns: repeat(2, auto);
+    row-gap: 20px;
+    width: auto;
+  }
+  .hero-stats .stat-item:nth-child(2) { border-right: none; }
+  .hero-stats .stat-item:last-child   { border-right: none; }
+  .hero-stats .stat-item:nth-child(3) { padding-left: 0; }
+
+  /* Hero form: apilado verticalmente */
+  .hero-form-row { flex-direction: column; }
+  .hero-input {
+    border-right: 1px solid rgba(255,255,255,0.14);
+    border-bottom: none;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  }
+  .hero-submit {
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    padding: 14px 20px;
+  }
+
+  /* Secciones */
+  .section { padding: 70px 24px; }
+  .cta-section { padding: 70px 24px; }
+
+  /* Features: 2 columnas en tablet */
+  .features-grid {
+    grid-template-columns: 1fr 1fr;
+    background: rgba(255,255,255,0.04);
+  }
+
+  /* Trust section */
+  .trust-section { padding: 48px 24px; }
+  .trust-block { gap: 20px; }
+  .trust-label { min-width: auto; width: 100%; margin-bottom: 4px; }
+  .devices-row { gap: 20px; }
+  .payments-row { gap: 8px; }
+
+  /* Catálogo */
+  .content-grid { grid-template-columns: 1fr; gap: 40px; }
+  .content-visual { max-width: 480px; }
+  .catalog-grid { gap: 10px; }
+
+  /* Pricing */
+  .billing-tabs { gap: 4px; margin-bottom: 32px; }
+  .billing-tab { padding: 8px 16px; font-size: 0.8rem; }
+  .save-badge { margin-left: 4px; }
+  .pricing-cards {
+    grid-template-columns: 1fr;
+    max-width: 440px;
+    margin: 0 auto;
+    background: transparent;
+    border: none;
+    gap: 16px;
+  }
+  .price-card.featured { transform: none; }
+  .price-card.featured:hover { transform: translateY(-4px); }
+
+  /* Steps */
+  .steps-grid { grid-template-columns: 1fr 1fr; gap: 40px 0; }
+  .steps-grid::before { display: none; }
+
+  /* Devices */
+  .devices-grid { grid-template-columns: 1fr 1fr; }
+
+  /* Footer */
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  footer { padding: 48px 24px 24px; }
+  .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+}
+
+/* ── 640px: móvil grande ── */
+@media (max-width: 640px) {
+  /* Nav */
+  nav { padding: 14px 20px; }
+  .logo-text { font-size: 1.6rem; }
+  .logo-sub { display: none; }
+
+  /* Hero mobile pequeño */
+  .hero { padding: 90px 16px 32px; }
+  .hero h1 { font-size: clamp(2.4rem, 11vw, 3.2rem); }
+  .hero h1 span { font-size: clamp(1.7rem, 8vw, 2.4rem); }
+  .hero-desc { font-size: 0.95rem; }
+  /* Stats en 2x2, tamaño reducido */
+  .hero-stats { margin-top: 28px; padding-top: 20px; }
+  .stat-number { font-size: 1.7rem; }
+  .stat-item { padding: 0 14px; }
+  .stat-item:first-child { padding-left: 0; }
+  /* TV: padding mínimo para las cards flotantes */
+  .tv-mockup { padding: 0 44px; }
+  /* Cards flotantes: más pequeñas en mobile */
+  .floating-card { padding: 8px 10px; max-width: 130px; }
+  .card-text  { font-size: 0.62rem; }
+  .card-value { font-size: 0.88rem; }
+
+  /* Botones globales */
+  .btn-primary, .btn-secondary {
+    padding: 14px 24px;
+    font-size: 0.85rem;
+  }
+
+  /* Secciones */
+  .section { padding: 60px 20px; }
+  .cta-section { padding: 60px 20px; }
+  .section-title { font-size: clamp(1.8rem, 7vw, 2.6rem); }
+
+  /* Features */
+  .features-grid { grid-template-columns: 1fr; background: transparent; border: none; gap: 1px; }
+
+  /* Trust */
+  .trust-section { padding: 40px 20px; }
+  .trust-block { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .devices-row { gap: 20px; flex-wrap: wrap; }
+  .device-item { font-size: 0.75rem; }
+  .payment-pill { font-size: 0.78rem; padding: 6px 12px; }
+
+  /* FAQ inner padding */
+  .faq-question { padding: 18px 20px; font-size: 0.88rem; }
+  .faq-answer-inner { padding: 0 20px 18px; }
+
+  /* Catálogo */
+  .catalog-grid { gap: 8px; }
+  .catalog-card-title { font-size: 0.72rem; }
+  .catalog-card-inner { padding: 10px; }
+
+  /* Steps */
+  .steps-grid { grid-template-columns: 1fr; gap: 32px; }
+  .step { padding: 0 8px; }
+
+  /* Devices */
+  .devices-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .device-card { padding: 24px 12px; }
+  .device-icon { font-size: 2rem; }
+
+  /* Payments */
+  .payment-item { flex: 1 1 100%; }
+
+  /* Pricing */
+  .price-card { padding: 36px 24px; }
+  .price-amount { font-size: 3rem; }
+  .pricing-toggle { gap: 12px; }
+
+  /* FAQ */
+  .faq-question { padding: 20px 24px; font-size: 0.88rem; }
+  .faq-answer-inner { padding: 0 24px 20px; }
+
+  /* Footer */
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .footer-brand p { max-width: 100%; }
+  footer { padding: 40px 20px 20px; }
+
+  /* CTA */
+  .cta-title { font-size: clamp(1.8rem, 8vw, 2.6rem); }
+  .cta-form-row { flex-direction: column; border-radius: var(--radius-sm); }
+  .cta-input {
+    border-right: 1px solid rgba(255,255,255,0.12);
+    border-bottom: none;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  }
+  .cta-submit {
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    padding: 14px 20px;
+  }
+  .cta-actions { flex-direction: column; align-items: center; }
+  .cta-actions .btn-primary,
+  .cta-actions .btn-secondary { width: 100%; max-width: 340px; text-align: center; }
+  .cta-divider { display: none; }
+  .cta-metrics { 
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px 12px;
+    max-width: 100%;
+  }
+  .device-item--divider { display: none; }
+}
+
+/* ── 400px: móvil muy pequeño ── */
+@media (max-width: 400px) {
+  nav { padding: 12px 16px; }
+  .logo-bull { width: 42px; height: 42px; }
+  .logo-text { font-size: 1.4rem; }
+
+  .hero { padding: 80px 12px 28px; }
+  .hero h1 { font-size: clamp(2.2rem, 13vw, 2.8rem); }
+  .hero h1 span { font-size: clamp(1.5rem, 10vw, 2rem); }
+  /* TV padding mínimo para las cards en pantallas muy pequeñas */
+  .tv-mockup { padding: 0 36px; }
+  .floating-card { padding: 6px 8px; max-width: 110px; }
+
+  .section { padding: 52px 16px; }
+  .cta-section { padding: 52px 16px; }
+
+  .features-grid { gap: 0; }
+  .feature-card { padding: 28px 20px; }
+
+  .pricing-cards { max-width: 100%; }
+  .price-card { padding: 30px 20px; }
+
+  footer { padding: 36px 16px 16px; }
+  .cta-metrics { 
+    gap: 16px 8px;
+    max-width: 100%;
+  }
+  .cta-metric-value { font-size: 1.6rem; }
+  .cta-metric-label { font-size: 0.65rem; }
+}
+
+/* ── Reducción de movimiento ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}

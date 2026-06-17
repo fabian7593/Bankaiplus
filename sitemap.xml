@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Página principal -->
+  <url>
+    <loc>https://taurotv.com/</loc>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://taurotv.com/images/og.jpg</image:loc>
+      <image:title>Tauro TV - Streaming Premium</image:title>
+      <image:caption>Plataforma de streaming en Costa Rica</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Sección de Beneficios -->
+  <url>
+    <loc>https://taurotv.com/#features</loc>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Catálogo -->
+  <url>
+    <loc>https://taurotv.com/#catalog</loc>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Planes y Precios -->
+  <url>
+    <loc>https://taurotv.com/#pricing</loc>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- FAQ -->
+  <url>
+    <loc>https://taurotv.com/#faq</loc>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Dispositivos compatibles -->
+  <url>
+    <loc>https://taurotv.com/#dispositivos</loc>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Contacto / CTA -->
+  <url>
+    <loc>https://taurotv.com/#contacto</loc>
+    <lastmod>2026-06-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>

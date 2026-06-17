@@ -1,0 +1,476 @@
+/**
+ * TAURO TV — HERO
+ * ─────────────────────────────────────────────────────────
+ * Layout: columna izquierda (texto + form) + columna derecha (TV mockup)
+ * El TV mockup tiene un slider de imágenes con puntitos de navegación.
+ */
+
+/* ════════════════════════════════════════════════════════
+   SECCIÓN HERO
+   Layout: dos columnas con flexbox (no absolute).
+   El TV se queda dentro del flujo y respeta el max-width.
+════════════════════════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  position: relative;
+  overflow: hidden;
+  padding: 88px 48px 48px;
+  /* Contenedor centrado */
+  padding-left: max(48px, calc((100% - var(--max-width)) / 2 + 48px));
+  padding-right: max(48px, calc((100% - var(--max-width)) / 2 + 48px));
+}
+
+/* ── Fondo degradado ── */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 65% 45%, rgba(229,9,20,0.05) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 50% at 5%  80%, rgba(229,9,20,0.04) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 70% at 100% 0%, rgba(80,0,0,0.12)   0%, transparent 60%),
+    linear-gradient(160deg, #080808 0%, #0F0F0F 60%, #080808 100%);
+  z-index: 0;
+}
+
+/* Borde izquierdo decorativo (rojo) */
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 0;
+  width: 3px;
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    var(--red) 30%,
+    var(--red-dim) 70%,
+    transparent 100%
+  );
+  opacity: 0.7;
+  z-index: 1;
+}
+
+/* Overlay cuando hay imagen de fondo personalizada */
+.hero-bg.has-image {
+  background-size: cover;
+  background-position: center;
+}
+.hero-bg.has-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(8,8,8,0.95) 0%,
+    rgba(8,8,8,0.70) 50%,
+    rgba(8,8,8,0.20) 100%
+  );
+}
+
+/* ════════════════════════════════════════════════════════
+   COLUMNA IZQUIERDA — texto, form, stats
+════════════════════════════════════════════════════════ */
+.hero-content {
+  position: relative;
+  z-index: 3;
+  /* Toma ~5/12 del espacio, se encoge si no hay espacio */
+  flex: 0 1 540px;
+  min-width: 0;
+  padding-bottom: 40px;
+}
+
+/* ── Título H1 ──
+   clamp(min, preferred, max)
+   min   = 2.8rem  → se ve bien en móvil pequeño
+   pref  = 5.5vw   → escala proporcional al viewport
+   max   = 5.5rem  → nunca más grande que esto en desktop
+   (el original usaba 8rem como máximo — era demasiado) */
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5.5vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: 0.03em;
+  color: var(--white);
+  animation: fadeSlideUp 0.8s ease 0.1s both;
+}
+
+/* Línea en cursiva debajo del H1 */
+.hero h1 span {
+  display: block;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(2rem, 4vw, 3.8rem);
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  margin-top: 6px;
+  opacity: 0.75;
+}
+
+/* ── Descripción ── */
+.hero-desc {
+  margin-top: 20px;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-body);
+  max-width: 460px;
+  animation: fadeSlideUp 0.8s ease 0.2s both;
+}
+
+/* ════════════════════════════════════════════════════════
+   FORMULARIO HERO (estilo Disney+)
+════════════════════════════════════════════════════════ */
+.hero-form {
+  margin-top: 32px;
+  animation: fadeSlideUp 0.8s ease 0.3s both;
+}
+
+/* Badge "24 horas gratis" */
+.hero-form-trial {
+  display: inline-block;
+  background: rgba(70,211,105,0.1);
+  border: 1px solid rgba(70,211,105,0.22);
+  color: var(--green);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+
+/* Fila email + botón */
+.hero-form-row {
+  display: flex;
+  max-width: 500px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.5);
+}
+
+.hero-input {
+  flex: 1;
+  min-width: 0; /* necesario para que flex funcione bien */
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-right: none;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 14px 18px;
+  outline: none;
+  transition: background var(--transition), border-color var(--transition);
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+}
+
+.hero-input::placeholder { color: var(--text-muted); }
+.hero-input:focus {
+  background: rgba(255,255,255,0.11);
+  border-color: rgba(255,255,255,0.28);
+}
+
+.hero-submit {
+  flex-shrink: 0;
+  background: var(--red);
+  color: var(--white);
+  border: none;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 14px 22px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--transition), opacity var(--transition);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.hero-submit:hover   { background: var(--red-hover); }
+.hero-submit:disabled { opacity: 0.65; cursor: not-allowed; }
+
+/* Mensaje de error de validación */
+.hero-form-error {
+  color: #FF5561;
+  font-size: 0.78rem;
+  margin-top: 6px;
+  min-height: 1em;
+}
+
+/* Nota "¿Ya tenés cuenta?" */
+.hero-form-note {
+  margin-top: 10px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.hero-form-link {
+  color: var(--text-body);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition);
+}
+.hero-form-link:hover { color: var(--white); }
+
+/* ════════════════════════════════════════════════════════
+   STATS (4 en una fila usando grid)
+   — grid garantiza que no se rompa en 3+1
+════════════════════════════════════════════════════════ */
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 0;
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  animation: fadeSlideUp 0.8s ease 0.45s both;
+  width: fit-content;
+  max-width: 100%;
+}
+
+/* Separador vertical entre stats */
+.stat-item {
+  padding: 0 24px;
+  border-right: 1px solid rgba(255,255,255,0.07);
+}
+.stat-item:first-child { padding-left: 0; }
+.stat-item:last-child  { border-right: none; }
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--white);
+  letter-spacing: 0.06em;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 4px;
+  white-space: nowrap;
+}
+
+/* ════════════════════════════════════════════════════════
+   COLUMNA DERECHA — TV Mockup
+   Desktop: dentro del flujo flex, toma ~7/12 del espacio
+   Mobile (≤900px): se apila debajo del texto, full-width
+════════════════════════════════════════════════════════ */
+.hero-visual {
+  position: relative;
+  /* Toma el espacio restante, crece hasta 720px */
+  flex: 1 1 58%;
+  max-width: 720px;
+  z-index: 2;
+  animation: fadeIn 1.2s ease 0.5s both;
+}
+
+/* Wrapper que contiene el frame + floating cards
+   El padding lateral crea espacio para las floating cards */
+.tv-mockup {
+  width: 100%;
+  position: relative;
+  padding: 0 72px;     /* espacio para cards flotantes */
+}
+
+/* Frame del TV — contiene pantalla + pata + base */
+.tv-frame {
+  position: relative;
+}
+
+/* ── Pantalla del TV ── */
+.tv-screen {
+  background: #0a0a0a;
+  border: 2px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-lg);
+  aspect-ratio: 16 / 10;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 6px rgba(8,8,8,0.9),
+    0 0 0 7px rgba(255,255,255,0.04),
+    0 32px 64px rgba(0,0,0,0.85);
+}
+
+/* Líneas de escaneo decorativas */
+.tv-screen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.025) 2px,
+    rgba(0,0,0,0.025) 4px
+  );
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Pata del TV */
+.tv-stand {
+  width: 18%;
+  height: 18px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.06), transparent);
+  margin: 0 auto;
+  clip-path: polygon(25% 0%, 75% 0%, 90% 100%, 10% 100%);
+}
+
+/* Base del TV */
+.tv-base {
+  width: 36%;
+  height: 5px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07), transparent);
+  border-radius: 3px;
+  margin: 0 auto;
+}
+
+/* ════════════════════════════════════════════════════════
+   SLIDER dentro del TV
+════════════════════════════════════════════════════════ */
+.tv-slider {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+/* Cada slide — ocupa toda la pantalla */
+.tv-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Slide activo */
+.tv-slide.active {
+  opacity: 1;
+}
+
+/* Slide con imagen real */
+.tv-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Slide placeholder (cuando no hay imágenes) */
+.tv-slide-placeholder {
+  background: linear-gradient(135deg, #161616 0%, #080808 100%);
+}
+
+/* Contenido del placeholder (logo + tagline) */
+.screen-content {
+  text-align: center;
+  position: relative;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.screen-logo {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  text-shadow: 0 0 40px rgba(200,149,42,0.6);
+}
+
+.screen-tagline {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* ── Puntitos de navegación del slider ── */
+.tv-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  z-index: 5;
+}
+
+.tv-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.25s, transform 0.25s;
+}
+
+.tv-dot.active {
+  background: var(--white);
+  transform: scale(1.3);
+}
+
+/* ════════════════════════════════════════════════════════
+   FLOATING CARDS (contenidas dentro del padding del mockup)
+════════════════════════════════════════════════════════ */
+.floating-card {
+  position: absolute;
+  background: linear-gradient(135deg, rgba(229,9,20,0.15) 0%, rgba(229,9,20,0.08) 100%);
+  border: 1px solid rgba(229,9,20,0.4);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  backdrop-filter: blur(16px);
+  z-index: 6;
+  animation: float 4s ease-in-out infinite;
+  box-shadow: 0 8px 24px rgba(229,9,20,0.2), 0 0 0 1px rgba(229,9,20,0.1) inset;
+  /* Máximo ancho para que no se salgan */
+  max-width: 160px;
+}
+
+.floating-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(15,15,15,0.7);
+  border-radius: var(--radius-md);
+  z-index: -1;
+}
+
+/* Card izquierda — se posiciona dentro del padding izquierdo del mockup */
+.float-card-1 {
+  top: 18%;
+  left: 0;
+}
+
+/* Card derecha — se posiciona dentro del padding derecho del mockup */
+.float-card-2 {
+  bottom: 25%;
+  right: 0;
+  animation-delay: -1.5s;
+}
+
+.card-text  { 
+  font-size: 0.68rem; 
+  color: rgba(255,255,255,0.7); 
+  letter-spacing: 0.04em; 
+  font-weight: 500;
+}
+
+.card-value { 
+  font-family: var(--font-display); 
+  font-size: 1.05rem; 
+  color: var(--white); 
+  letter-spacing: 0.05em; 
+  margin-top: 2px; 
+  font-weight: 700;
+}

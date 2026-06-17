@@ -1,0 +1,67 @@
+/**
+ * ============================================================
+ * TAURO TV — VARIABLES CSS
+ * ============================================================
+ * Cambiá los colores aquí para actualizar todo el sitio.
+ *
+ * LÓGICA DE COLOR (psicología de conversión):
+ *   --red-*     → Rojo en CTAs primarios = urgencia + acción inmediata
+ *                 (Netflix usa exactamente esto para sus botones de suscripción)
+ *   --gold-*    → Dorado solo para el logo y la identidad del toro = exclusividad
+ *                 de marca. Lo que nos diferencia de Netflix y HBO.
+ *   --dark-*    → Negro cinematográfico como HBO = premium, sin saturar
+ *   --white / --text-* → Texto limpio de alto contraste
+ * ============================================================
+ */
+
+:root {
+  /* ── Acción / CTAs primarios (rojo Netflix-style) ── */
+  --red:          #E50914;   /* Rojo CTA principal — máxima urgencia */
+  --red-hover:    #FF1A27;   /* Rojo hover — más brillante */
+  --red-dim:      #8B0000;   /* Rojo oscuro — badges de oferta, acentos sutiles */
+  --red-glow:     rgba(229,9,20,0.25);   /* Glow para sombras */
+
+  /* ── Identidad de marca (dorado del toro) ── */
+  --gold:         #C8952A;   /* Dorado logo y marca — NO usar en botones CTA */
+  --gold-light:   #E8B84B;   /* Dorado hover logo */
+  --gold-dim:     #7A5A1A;   /* Dorado sutil — bordes decorativos */
+
+  /* ── Fondos (negro cinematográfico HBO-style) ── */
+  --dark:         #080808;   /* Negro base — más puro que antes */
+  --dark2:        #0F0F0F;   /* Secciones alternas */
+  --dark3:        #161616;   /* Cards, hover backgrounds */
+  --dark4:        #1E1E1E;   /* Tags, elementos elevados */
+  --dark5:        #242424;   /* Bordes visibles */
+
+  /* ── Texto ── */
+  --white:        #FFFFFF;   /* Texto principal — máximo contraste */
+  --cream:        #F0EEE8;   /* Texto principal suave — headings */
+  --text-body:    #B8B8B8;   /* Texto de párrafos */
+  --text-muted:   #707070;   /* Texto secundario, labels, placeholders */
+
+  /* ── Acento secundario: para badges "disponible", éxitos ── */
+  --green:        #46D369;   /* Verde Netflix para badges "disponible" */
+
+  /* ── Tipografías ── */
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-serif:   'DM Serif Display', serif;
+  --font-body:    'Outfit', sans-serif;
+
+  /* ── Contenedor global ── */
+  /* Todas las secciones limitan su contenido a este ancho máximo.
+     El fondo (background) sigue siendo full-width.
+     Esto evita que el contenido se separe en pantallas anchas o al hacer zoom. */
+  --max-width: 1400px;
+  --section-padding: 100px 48px;
+  --section-padding-mobile: 70px 24px;
+  --section-padding-small: 60px 20px;
+
+  /* ── Radios ── */
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  12px;
+
+  /* ── Transiciones ── */
+  --transition: 0.2s ease;
+  --transition-slow: 0.4s ease;
+}
