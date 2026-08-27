@@ -1,0 +1,240 @@
+/**
+ * ============================================================
+ * BANKAI + — BOTONES FLOTANTES (WhatsApp + Email)
+ * ============================================================
+ * Diseño: stack vertical en esquina inferior derecha.
+ * WhatsApp más grande (acción principal), email como secundario.
+ * Animaciones sutiles, tooltips al hover, responsive.
+ * ============================================================
+ */
+
+/* ── Contenedor de botones flotantes ── */
+.floating-btns {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+  z-index: 9999;
+}
+
+/* ── Botón base ── */
+.float-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  text-decoration: none;
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  position: relative;
+  /* Entrada animada */
+  animation: floatBtnEntry 0.5s ease both;
+}
+
+.float-btn:nth-child(1) { animation-delay: 0.8s; }
+.float-btn:nth-child(2) { animation-delay: 0.6s; }
+
+.float-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.5), 0 3px 12px rgba(0, 0, 0, 0.4);
+}
+
+.float-btn:active {
+  transform: scale(0.95);
+}
+
+/* ── WhatsApp ── */
+.float-btn-whatsapp {
+  background: #25D366;
+  width: 60px;
+  height: 60px;
+}
+
+.float-btn-whatsapp:hover {
+  background: #20bd5a;
+}
+
+.float-btn-whatsapp svg {
+  width: 28px;
+  height: 28px;
+}
+
+/* ── Email ── */
+.float-btn-email {
+  background: var(--dark4, #1E1E1E);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  width: 48px;
+  height: 48px;
+}
+
+.float-btn-email:hover {
+  background: var(--red, #E50914);
+  border-color: var(--red, #E50914);
+}
+
+.float-btn-email svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ── Tooltip ── */
+.float-btn-tooltip {
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--dark3, #161616);
+  color: var(--cream, #F0EEE8);
+  font-family: var(--font-body, 'Outfit', sans-serif);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm, 4px);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  transform: translateY(-50%) translateX(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.float-btn:hover .float-btn-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* ── Volver arriba ── */
+.float-btn-top {
+  background: var(--dark4, #1E1E1E);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  width: 48px;
+  height: 48px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px) scale(0.85);
+  animation: none; /* visibility is JS-driven via .show, not the shared entry animation */
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease, background 0.25s ease;
+}
+.float-btn-top.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+.float-btn-top:hover {
+  background: var(--red, #E50914);
+  border-color: var(--red, #E50914);
+}
+.float-btn-top svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ── Pulse sutil en WhatsApp para atraer atención ── */
+.float-btn-whatsapp::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: rgba(37, 211, 102, 0.3);
+  animation: floatPulse 2.5s ease-in-out infinite;
+  z-index: -1;
+}
+
+@keyframes floatPulse {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50%      { transform: scale(1.15); opacity: 0; }
+}
+
+@keyframes floatBtnEntry {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .floating-btns {
+    bottom: 20px;
+    right: 16px;
+    gap: 12px;
+  }
+
+  .float-btn-whatsapp {
+    width: 54px;
+    height: 54px;
+  }
+
+  .float-btn-whatsapp svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .float-btn-email {
+    width: 44px;
+    height: 44px;
+  }
+
+  .float-btn-email svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .float-btn-top {
+    width: 44px;
+    height: 44px;
+  }
+
+  .float-btn-top svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Ocultar tooltips en mobile — el espacio es limitado */
+  .float-btn-tooltip {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .floating-btns {
+    bottom: 16px;
+    right: 12px;
+    gap: 10px;
+  }
+
+  .float-btn-whatsapp {
+    width: 50px;
+    height: 50px;
+  }
+
+  .float-btn-email {
+    width: 40px;
+    height: 40px;
+  }
+
+  .float-btn-top {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* ── Reducción de movimiento ── */
+@media (prefers-reduced-motion: reduce) {
+  .float-btn-whatsapp::after {
+    animation: none;
+  }
+  .float-btn {
+    animation: none;
+  }
+}

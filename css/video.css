@@ -1,0 +1,61 @@
+/**
+ * ============================================================
+ * BANKAI + — VIDEO SECTION (Streamable embed)
+ * ============================================================
+ */
+
+/* ── Sección ── */
+.video-section {
+  background: var(--dark2, #0F0F0F);
+}
+
+/* ── Wrapper del video — full width del contenedor padre ── */
+.video-wrapper {
+  width: 100%;
+  margin-top: 48px;
+}
+
+/* ── Frame cinematográfico ── */
+.video-frame {
+  position: relative;
+  border-radius: var(--radius-lg, 12px);
+  overflow: hidden;
+  background: var(--dark, #080808);
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.6),
+    0 2px 12px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ── Glow inferior ── */
+.video-glow {
+  position: absolute;
+  bottom: -1px;
+  left: 10%;
+  right: 10%;
+  height: 60px;
+  background: radial-gradient(ellipse at center, var(--red-glow, rgba(229,9,20,0.25)) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .video-wrapper {
+    margin-top: 36px;
+  }
+}
+
+@media (max-width: 640px) {
+  .video-wrapper {
+    margin-top: 28px;
+  }
+
+  .video-frame {
+    border-radius: var(--radius-md, 8px);
+  }
+
+  .video-glow {
+    height: 40px;
+  }
+}

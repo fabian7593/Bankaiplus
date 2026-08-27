@@ -1,5 +1,5 @@
 /**
- * TAURO TV — FOOTER
+ * BANKAI + — FOOTER
  */
 
 footer {
@@ -87,4 +87,17 @@ footer {
 
 .footer-region {
   color: var(--text-muted);
+}
+
+/* Nota de transición de marca: Tauro TV → Bankai + */
+.footer-former-brand {
+  margin-top: 10px;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.footer-former-brand strong {
+  color: var(--gold);
+  font-weight: 600;
 }

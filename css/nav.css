@@ -1,5 +1,5 @@
 /**
- * TAURO TV — NAVEGACIÓN
+ * BANKAI + — NAVEGACIÓN
  */
 
 nav {
@@ -34,12 +34,12 @@ nav.scrolled {
   flex-shrink: 0;
 }
 
-.logo-bull {
+.logo-mark {
   width: 62px;
   height: 62px;
 }
 
-.logo-bull svg {
+.logo-mark svg {
   width: 100%;
   height: 100%;
 }

@@ -1,5 +1,5 @@
 /**
- * TAURO TV — SECCIONES
+ * BANKAI + — SECCIONES
  * Features, Catálogo, Cómo funciona, Dispositivos, Pagos, FAQ, CTA
  */
 
@@ -204,6 +204,99 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-top: 3px;
+}
+
+/* ── Botón de catálogo completo ── */
+.catalog-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+}
+
+.catalog-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(135deg, rgba(229,9,20,0.12) 0%, rgba(229,9,20,0.06) 100%);
+  border: 1px solid rgba(229,9,20,0.3);
+  color: var(--white);
+  padding: 18px 32px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: all var(--transition-slow);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(229,9,20,0.1);
+}
+
+.catalog-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(229,9,20,0.2) 0%, rgba(229,9,20,0.1) 100%);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.catalog-btn:hover::before {
+  opacity: 1;
+}
+
+.catalog-btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(229,9,20,0.5);
+  box-shadow: 0 8px 28px rgba(229,9,20,0.25);
+}
+
+.catalog-btn-icon {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  flex-shrink: 0;
+  transition: transform var(--transition);
+  position: relative;
+  z-index: 1;
+}
+
+.catalog-btn:hover .catalog-btn-icon {
+  transform: scale(1.1);
+}
+
+.catalog-btn-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  position: relative;
+  z-index: 1;
+}
+
+.catalog-btn-main {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--white);
+}
+
+.catalog-btn-sub {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.catalog-btn-arrow {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  flex-shrink: 0;
+  transition: transform var(--transition);
+  position: relative;
+  z-index: 1;
+  opacity: 0.7;
+}
+
+.catalog-btn:hover .catalog-btn-arrow {
+  transform: translateX(4px);
+  opacity: 1;
 }
 
 /* ── CÓMO FUNCIONA ── */

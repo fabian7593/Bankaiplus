@@ -1,9 +1,9 @@
-# Tauro TV — Landing Page
+# Bankai + — Landing Page
 
 ## Estructura del proyecto
 
 ```
-TAUROTV/
+BANKAIPLUS/
 ├── index.html               ← Página principal
 ├── css/
 │   ├── variables.css        ← Colores, tipografías, espaciado

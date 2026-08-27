@@ -1,5 +1,5 @@
 /**
- * TAURO TV — RESPONSIVE
+ * BANKAI + — RESPONSIVE
  * Breakpoints:
  *   1200px → Desktop grande
  *    900px → Tablet / desktop pequeño
@@ -96,8 +96,14 @@
   .content-grid { grid-template-columns: 1fr; gap: 40px; }
   .content-visual { max-width: 480px; }
   .catalog-grid { gap: 10px; }
+  .catalog-btn { padding: 16px 28px; gap: 14px; }
+  .catalog-btn-icon { width: 22px; height: 22px; }
+  .catalog-btn-main { font-size: 0.9rem; }
 
   /* Pricing */
+  .region-toggle-wrap { max-width: 360px; margin: 24px auto 28px; }
+  .region-toggle { padding: 10px 16px; font-size: 0.85rem; gap: 6px; }
+  
   .billing-tabs { gap: 4px; margin-bottom: 32px; }
   .billing-tab { padding: 8px 16px; font-size: 0.8rem; }
   .save-badge { margin-left: 4px; }
@@ -178,6 +184,12 @@
   .catalog-grid { gap: 8px; }
   .catalog-card-title { font-size: 0.72rem; }
   .catalog-card-inner { padding: 10px; }
+  .catalog-cta { margin-top: 36px; }
+  .catalog-btn { padding: 14px 24px; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .catalog-btn-icon { width: 20px; height: 20px; }
+  .catalog-btn-main { font-size: 0.85rem; }
+  .catalog-btn-sub { font-size: 0.68rem; }
+  .catalog-btn-arrow { width: 18px; height: 18px; }
 
   /* Steps */
   .steps-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -232,7 +244,7 @@
 /* ── 400px: móvil muy pequeño ── */
 @media (max-width: 400px) {
   nav { padding: 12px 16px; }
-  .logo-bull { width: 42px; height: 42px; }
+  .logo-mark { width: 42px; height: 42px; }
   .logo-text { font-size: 1.4rem; }
 
   .hero { padding: 80px 12px 28px; }
@@ -248,6 +260,20 @@
   .features-grid { gap: 0; }
   .feature-card { padding: 28px 20px; }
 
+  .catalog-btn { 
+    padding: 12px 20px; 
+    gap: 10px; 
+    font-size: 0.85rem;
+    width: 100%;
+    max-width: 320px;
+  }
+  .catalog-btn-text { gap: 1px; }
+  .catalog-btn-main { font-size: 0.8rem; }
+  .catalog-btn-sub { font-size: 0.65rem; }
+
+  .region-toggle-wrap { max-width: 100%; padding: 4px; gap: 6px; }
+  .region-toggle { padding: 8px 12px; font-size: 0.8rem; }
+  
   .pricing-cards { max-width: 100%; }
   .price-card { padding: 30px 20px; }
 

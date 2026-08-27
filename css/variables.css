@@ -1,13 +1,13 @@
 /**
  * ============================================================
- * TAURO TV — VARIABLES CSS
+ * BANKAI + — VARIABLES CSS
  * ============================================================
  * Cambiá los colores aquí para actualizar todo el sitio.
  *
  * LÓGICA DE COLOR (psicología de conversión):
  *   --red-*     → Rojo en CTAs primarios = urgencia + acción inmediata
  *                 (Netflix usa exactamente esto para sus botones de suscripción)
- *   --gold-*    → Dorado solo para el logo y la identidad del toro = exclusividad
+ *   --gold-*    → Dorado solo para el logo y la identidad de marca = exclusividad
  *                 de marca. Lo que nos diferencia de Netflix y HBO.
  *   --dark-*    → Negro cinematográfico como HBO = premium, sin saturar
  *   --white / --text-* → Texto limpio de alto contraste
@@ -21,8 +21,8 @@
   --red-dim:      #8B0000;   /* Rojo oscuro — badges de oferta, acentos sutiles */
   --red-glow:     rgba(229,9,20,0.25);   /* Glow para sombras */
 
-  /* ── Identidad de marca (dorado del toro) ── */
-  --gold:         #C8952A;   /* Dorado logo y marca — NO usar en botones CTA */
+  /* ── Identidad de marca (dorado Bankai +) ── */
+  --gold:         #C8952A;   /* Dorado logo y marca Bankai + — NO usar en botones CTA */
   --gold-light:   #E8B84B;   /* Dorado hover logo */
   --gold-dim:     #7A5A1A;   /* Dorado sutil — bordes decorativos */
 

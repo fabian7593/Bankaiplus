@@ -1,5 +1,5 @@
 /**
- * TAURO TV — MAIN JS
+ * BANKAI + — MAIN JS
  * Scroll reveal, FAQ, Nav, Hamburger, Formularios de lead
  */
 
@@ -245,12 +245,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const MODE_LABELS = {
     monthly:    'Mensual',
     semiannual: 'Semestral (pague 5, lleve 6)',
-    annual:     'Anual (pague 10, lleve 12)',
+    annual:     'Anual (pague 9, lleve 12)',
   };
 
   function getModeLabel() {
-    const mode = (window.TAURO_STATE && window.TAURO_STATE.getMode)
-      ? window.TAURO_STATE.getMode()
+    const mode = (window.BANKAI_STATE && window.BANKAI_STATE.getMode)
+      ? window.BANKAI_STATE.getMode()
       : 'monthly';
     return MODE_LABELS[mode] || mode;
   }
@@ -264,19 +264,53 @@ document.addEventListener('DOMContentLoaded', () => {
   // Helper: construye la URL de WhatsApp con el mensaje armado
   function buildWhatsAppUrl(email, planKey) {
     const wa   = 'https://wa.me/' + CONFIG.contact.whatsappNumber;
-    const plan = getPlanLabel(planKey);
     const mode = getModeLabel();
 
+    // Obtener datos del plan desde sessionStorage si existe
+    const storedPlan = sessionStorage.getItem('selected_plan');
+    const storedRegion = sessionStorage.getItem('selected_region');
+    const storedCurrency = sessionStorage.getItem('selected_currency');
+    const storedPrice = sessionStorage.getItem('selected_price');
+    const storedMode = sessionStorage.getItem('selected_mode');
+
     let msg;
-    if (plan) {
+    
+    // Si hay un plan específico en sessionStorage (viene de pricing)
+    if (storedPlan && storedPrice) {
+      const planLabel = getPlanLabel(storedPlan);
+      const regionLabel = storedRegion === 'cr' ? 'Costa Rica' : 'LATAM';
+      const modeLabel = storedMode === 'monthly' ? 'Mensual' : 
+                       storedMode === 'semiannual' ? 'Semestral (pague 5, lleve 6)' : 
+                       'Anual (pague 9, lleve 12)';
+      
       msg =
-        'Hola! Quiero solicitar mi prueba gratuita de 24 horas.\n' +
+        'Hola! Quiero suscribirme a Bankai +.\n\n' +
+        '📋 Plan seleccionado:\n' +
+        '• ' + planLabel + '\n' +
+        '• Región: ' + regionLabel + '\n' +
+        '• Precio: ' + storedPrice + '\n' +
+        '• Facturación: ' + modeLabel + '\n\n' +
+        '📧 Mi correo: ' + email;
+      
+      // Limpiar sessionStorage después de usar
+      sessionStorage.removeItem('selected_plan');
+      sessionStorage.removeItem('selected_region');
+      sessionStorage.removeItem('selected_currency');
+      sessionStorage.removeItem('selected_price');
+      sessionStorage.removeItem('selected_mode');
+      
+    } else if (planKey) {
+      // Método legacy (por si acaso)
+      const plan = getPlanLabel(planKey);
+      msg =
+        'Hola! Quiero suscribirme a Bankai +.\n\n' +
         'Plan de interés: ' + plan + '\n' +
         'Facturación: ' + mode + '\n' +
         'Mi correo: ' + email;
     } else {
+      // Sin plan específico - solicitud de prueba gratis
       msg =
-        'Hola! Quiero solicitar mi prueba gratuita de 24 horas.\n' +
+        'Hola! Quiero solicitar mi prueba gratuita de 24 horas.\n\n' +
         'Mi correo: ' + email;
     }
 

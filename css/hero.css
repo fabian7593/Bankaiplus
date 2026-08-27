@@ -1,5 +1,5 @@
 /**
- * TAURO TV — HERO
+ * BANKAI + — HERO
  * ─────────────────────────────────────────────────────────
  * Layout: columna izquierda (texto + form) + columna derecha (TV mockup)
  * El TV mockup tiene un slider de imágenes con puntitos de navegación.
@@ -213,6 +213,39 @@
   transition: color var(--transition);
 }
 .hero-form-link:hover { color: var(--white); }
+
+/* Botón de catálogo — secundario pero visible */
+.hero-catalog-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 10px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: background var(--transition), border-color var(--transition), transform var(--transition);
+  backdrop-filter: blur(4px);
+}
+
+.hero-catalog-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+.hero-catalog-btn svg {
+  opacity: 0.7;
+}
+.hero-catalog-btn:hover svg {
+  opacity: 1;
+}
 
 /* ════════════════════════════════════════════════════════
    STATS (4 en una fila usando grid)

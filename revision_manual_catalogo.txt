@@ -1,0 +1,69 @@
+RECONCILIACIÓN COMPLETA — Excel (VORTEX_Catalogo_Master) ↔ catalog-data.js
+Actualizado: 2026-08-27
+============================================================================
+
+RESULTADO
+  Filas del Excel (con título) ....... 1418
+  Entradas en catalog-data.js ........ 1376
+  Emparejadas 1:1 .................... 1375
+  Filas del Excel omitidas (duplicadas
+    dentro del propio Excel) ......... 43
+  Entradas del catálogo sin fila ..... 1  (Harry Potter - Deathly Hallows Part 2,
+                                           dejada a pedido del usuario)
+
+  → El catálogo NO tiene nada que no esté en el Excel, salvo esa única
+    excepción aprobada. Ver mapeo_excel_catalogo.csv para el detalle
+    fila por fila.
+
+----------------------------------------------------------------------------
+TÍTULOS CORREGIDOS EN catalog-data.js
+(estaban mal escritos y TMDB no los encontraba)
+
+  'El Aro (2002)'                   → 'The Ring'
+  'El aro 3'                        → 'Rings'
+  'リング'                          → 'Ringu'          (estaba en japonés)
+  'Capitulo Final Resident Evil'    → 'Resident Evil: The Final Chapter'
+  'Alice in Wonderland Tim Burton'  → 'Alice in Wonderland (2010)'
+  'Beauty and the Beast 1991'       → 'Beauty and the Beast (1991)'
+  'Eso'  (type tv, sin seasons)     → 'It (1990)' + seasons '1'
+  'Open Season' / 'Open Season 2'   → 'Brother Bear' / 'Brother Bear 2'
+       (VTX-1024/1025 "Tierra de osos" es Brother Bear, no Open Season)
+  'He-Man and the Masters of the Universe' (serie)
+                                    → 'Masters of the Universe' (película 2026)
+       (VTX-1395 figura como Película en el Excel)
+
+BORRADAS DE catalog-data.js (no tenían fila en el Excel)
+  'Za Faburu'   — duplicado exacto de 'The Fable (2019)'
+  'Obsession'   — había dos; se dejó la película de terror (VTX-1148),
+                  se borró la serie de drama/romance
+
+AGREGADAS A catalog-data.js (filas del Excel que faltaban)
+  VTX-0842  Lilo & Stitch (2025)              — live action
+  VTX-0981  Stitch! The Movie                 — 3ª de la saga
+  VTX-0997  Pinocchio (2022)                  — live action
+  VTX-0878  Obi-Wan Kenobi: A Jedi's Return   — documental (tt21860836)
+  VTX-0929  Berlín y la dama del armiño       — TMDB tv/308014
+
+----------------------------------------------------------------------------
+PENDIENTES DE TU LADO (no afectan al catálogo)
+
+1) VTX-1384 — "Los simpson Simpsley"
+   Es el episodio T37E8 de Los Simpson (julio 2026), no una película.
+   No se creó entrada. La entrada 'The Simpsons' del catálogo cubre hasta
+   la temporada 33: si querés reflejarlo, hay que subir ese rango.
+
+2) Harry Potter — el Excel tiene 7 filas y la saga son 8 películas.
+   Se dejaron las 8 en el catálogo asumiendo que tu carpeta "Harry Potter 7"
+   contiene Reliquias Parte 1 y Parte 2. Convendría agregar la fila que falta
+   al Excel para que quede 1:1.
+
+3) ID duplicado en el Excel: VTX-0918 se usa en dos filas distintas
+   ("My hero academia 4" y "Devil may cry 2007"). Conviene renumerar una.
+
+4) VTX-0932 está sin título (fila vacía en el Excel).
+
+5) 43 filas del Excel están duplicadas dentro del propio Excel (mismo
+   contenido con dos IDs). Están listadas en mapeo_excel_catalogo.csv con
+   estado "OMITIDO (duplicado del Excel)". Ejemplos: "Tierra de Zombies" y
+   "Zombie land 1"; "El silencio de los inocentes" y "Hannibal 1";
+   "Parque Magico" y "Wonder Park".

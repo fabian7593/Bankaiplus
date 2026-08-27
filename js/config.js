@@ -1,6 +1,6 @@
 /**
  * ============================================================
- * TAURO TV — ARCHIVO DE CONFIGURACIÓN
+ * BANKAI + — ARCHIVO DE CONFIGURACIÓN
  * ============================================================
  * Modificá este archivo para cambiar textos, precios,
  * imágenes, links de contacto y cualquier dato del sitio.
@@ -12,12 +12,12 @@ const CONFIG = {
 
   // ── DATOS GENERALES ─────────────────────────────────────
   site: {
-    name: 'Tauro TV',
+    name: 'Bankai +',
     tagline: 'Streaming Premium',
     subtitle: 'Streaming sin límites',
     description: 'Plataforma de streaming premium para Costa Rica y Latinoamérica. Contenido legal, calidad Full HD, soporte en español.',
     region: 'Costa Rica · LATAM',
-    copyright: '2026 Tauro TV. Todos los derechos reservados.',
+    copyright: '2026 Bankai +. Todos los derechos reservados.',
   },
 
   // ── LINKS DE CONTACTO ───────────────────────────────────
@@ -112,39 +112,53 @@ const CONFIG = {
 
   // ── ESTADÍSTICAS DEL HERO ───────────────────────────────
   stats: [
-    { number: '800+', label: 'Títulos' },
+    { number: '1300+', label: 'Títulos' },
     { number: 'HD',   label: 'Calidad Full 1080p' },
     { number: '4',    label: 'Perfiles Family' },
     { number: '24/7', label: 'Soporte' },
   ],
 
-  // ── TIPO DE CAMBIO (CRC por dólar) ──────────────────────
-  // Solo se usa cuando el usuario está en Costa Rica.
-  // Regla: el precio en dólares se redondea al entero más cercano,
-  // luego se multiplica por este valor.
-  // Ejemplo: $5.99 → $6 → ₡3,000
-  exchangeRate: 500,
-
-  // ── PRECIOS BASE EN USD (extranjeros / Centroamérica) ───
+  // ── PRECIOS ──────────────────────────────────────────────
+  // ⚠️ EL DÓLAR ES LA MONEDA BASE.
+  //    Definís los precios en USD y los colones se calculan solos
+  //    con el tipo de cambio del BCR (redondeado a ₡50 para que
+  //    siempre queden números presentables).
+  //
+  //    Para subir precios → tocá SOLO el bloque `usd`.
+  //    El tipo de cambio NO se toca a mano: se consulta automáticamente.
+  //
   // Reglas de descuento:
   //   Semestral → "pague 5, lleve 6" = total de 5 mensualidades por 6 meses
-  //   Anual     → "pague 10, lleve 12" = total de 10 mensualidades por 12 meses
+  //   Anual     → "pague 9, lleve 12" = total de 9 mensualidades por 12 meses
   pricing: {
-    // Precios mensuales base (USD)
+    // Moneda que ve el visitante al entrar. 'usd' | 'crc'
+    // Con 'usd' el sitio abre en dólares y el usuario cambia a colones
+    // manualmente con el toggle de región.
+    defaultCurrency: 'usd',
+
+    // ── Tipo de cambio: automático desde el BCR ──────────
+    // El sitio consulta esta API (GET, sin headers) y convierte los
+    // precios USD a colones solo. No hay que actualizar nada a mano.
+    exchangeRateApi: 'https://apis.gometa.org/tdc/tdc.json',
+
+    // Campo de la API a usar: 'venta' (lo que cuesta comprar 1 USD)
+    // o 'compra'. Se usa 'venta' para no perder margen en la conversión.
+    exchangeRateField: 'venta',
+
+    // Si la API falla, no responde, tarda demasiado o devuelve un valor
+    // absurdo, se usa este tipo de cambio.
+    exchangeRateFallback: 470,
+
+    // Horas que se guarda el tipo de cambio en el navegador antes de
+    // volver a consultar la API (el BCR lo actualiza 1 vez al día).
+    exchangeRateCacheHours: 6,
+
+    // Precios MENSUALES en USD — fuente de verdad de todo el sitio.
+    // Los colones se calculan solos: USD × tipo de cambio, redondeado a ₡50.
     usd: {
-      basic:    5.99,
-      standard: 8.99,
-      family:   11.99,
-    },
-    // Precios mensuales base (CRC — para nacionales de Costa Rica)
-    // Regla: redondear precio USD al entero más cercano × 500
-    // basic:    round(5.99)=6  → 6×500 = ₡3,000
-    // standard: round(8.99)=9  → 9×500 = ₡4,500
-    // family:   round(11.99)=12→12×500 = ₡6,000
-    crc: {
-      basic:    3000,
-      standard: 4500,
-      family:   6000,
+      basic:    6,       // 1 pantalla
+      standard: 10.00,   // 2 pantallas
+      family:   13.33,   // 4 pantallas
     },
   },
 
