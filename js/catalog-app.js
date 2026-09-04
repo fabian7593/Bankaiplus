@@ -12,7 +12,7 @@
   const TMDB_IMG = 'https://image.tmdb.org/t/p/w500';
   const TMDB_IMG_BACKDROP = 'https://image.tmdb.org/t/p/w780';
   const CACHE_KEY = 'bankaiplus_tmdb_cache';
-  const CACHE_VERSION = 4; // bumped: entradas con 'tmdb' fijo resuelven por id, no por busqueda
+  const CACHE_VERSION = 5; // bumped: la clave del cache es el id de TMDB, ya no el titulo
   const EXTRAS_CACHE_KEY = 'bankaiplus_tmdb_extras_cache';
   const EXTRAS_CACHE_VERSION = 2; // bumped: recommendations now carry poster_path
 
@@ -35,7 +35,11 @@
   const countEl = document.getElementById('catalog-count');
   const searchInput = document.getElementById('catalog-search');
   const searchClear = document.getElementById('search-clear');
-  const filterTags = document.querySelectorAll('.filter-tag[data-filter]');
+  // Dos grupos independientes: tipo (Todos/Series/Películas) y género (Acción,
+  // Comedia, ..., Anime, Infantil). Cada uno se togglea dentro de su propia fila
+  // y ambos se combinan con Y — así "Series" + "Comedia" da solo series de comedia.
+  const filterTypeTags = document.querySelectorAll('.filter-row-type .filter-tag[data-filter]');
+  const filterGenreTags = document.querySelectorAll('.filter-row-genre .filter-tag[data-filter]');
   const yearFilterEl = document.getElementById('year-filter');
   const ratingFilterEl = document.getElementById('rating-filter');
   const sortEl = document.getElementById('catalog-sort');
@@ -43,7 +47,8 @@
   // ── State ──
   let allItems = [];       // enriched items with TMDB data
   let filteredItems = [];   // after filter + search
-  let activeFilter = 'all';
+  let activeTypeFilter = 'all';      // 'all' | 'series' | 'peliculas' — viene de item.type, no de category
+  let activeCategoryFilter = 'all';  // 'all' | 'accion' | 'comedia' | ... | 'anime' | 'infantil'
   let searchTerm = '';
   let yearFilter = 'all';     // 'all' | '2020-2026' | '2010-2019' | '2000-2009' | 'pre2000'
   let ratingFilter = 'all';   // 'all' | '7' | '8' | '9'
@@ -92,28 +97,33 @@
   // TMDB SEARCH
   // ══════════════════════════════════════════════════════════
   async function searchTMDB(title, type, tmdbId) {
-    const cacheKey = `${title}__${type}`;
+    const searchType = type === 'movie' ? 'movie' : 'tv';
+    // La clave del cache es el id, no el titulo: asi dos entradas con el mismo
+    // nombre ("Batman 1989" y "Batman 2022") nunca comparten ficha.
+    const cacheKey = `${searchType}__${tmdbId}`;
     if (tmdbCache[cacheKey]) return tmdbCache[cacheKey];
 
-    const searchType = type === 'movie' ? 'movie' : 'tv';
+    // Sin id no se consulta nada. Antes se caia a /search por texto y eso
+    // devolvia la obra equivocada en titulos cortos o repetidos ('X', 'War',
+    // 'The Ring'). Todas las entradas de catalog-data.js traen su id exacto;
+    // si alguna no lo trae es un error del dato y hay que verlo, no adivinarlo.
+    if (!tmdbId) {
+      console.warn('[catalogo] sin id de TMDB, no se consulta:', title);
+      return null;
+    }
 
-    // Si la entrada trae 'tmdb' con el id exacto, vamos directo a la ficha.
-    // La busqueda por texto ordena por popularidad y para titulos cortos
-    // ('War', 'Ted', 'X', 'The Ring') devuelve la pelicula equivocada.
-    const url = tmdbId
-      ? `https://api.themoviedb.org/3/${searchType}/${tmdbId}?language=es-MX`
-      : `https://api.themoviedb.org/3/search/${searchType}?query=${encodeURIComponent(title)}&language=es-MX&page=1`;
+    const url = `https://api.themoviedb.org/3/${searchType}/${tmdbId}?language=es-MX`;
 
     try {
       const res = await fetch(url, {
         headers: { 'Authorization': `Bearer ${TMDB_TOKEN}` }
       });
-      if (!res.ok) return null;
+      if (!res.ok) {
+        console.warn('[catalogo] TMDB respondio', res.status, 'para', searchType, tmdbId, '·', title);
+        return null;
+      }
       const data = await res.json();
-      // /movie/{id} devuelve la ficha directa; /search devuelve results[]
-      const result = tmdbId
-        ? (data && data.id ? data : null)
-        : (data.results && data.results[0] ? data.results[0] : null);
+      const result = (data && data.id) ? data : null;
 
       if (result) {
         const info = {
@@ -230,6 +240,16 @@
     }
   }
 
+  // Texto comparable para buscar: sin acentos, sin signos y en minúscula.
+  // Así "el señor de los anillos" también sale escribiendo "senor" o "Señor:".
+  function plano(str) {
+    return String(str == null ? '' : str)
+      .toLowerCase()
+      .normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/[^a-z0-9]+/g, ' ')
+      .trim();
+  }
+
   function escapeHtml(str) {
     return String(str == null ? '' : str).replace(/[&<>"']/g, (c) => ({
       '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
@@ -251,7 +271,7 @@
       return `
         <img src="${poster}" alt="${escapeHtml(item.title)}" loading="lazy">
         <div class="catalog-item-info">
-          <div class="catalog-item-title">${escapeHtml(item.tmdb.name || item.title)}</div>
+          <div class="catalog-item-title">${escapeHtml(item.title)}</div>
           <div class="catalog-item-meta">
             ${item.tmdb.rating ? `<span class="catalog-item-rating">★ ${escapeHtml(item.tmdb.rating)}</span>` : ''}
             ${item.tmdb.year ? `<span class="catalog-item-year">${escapeHtml(item.tmdb.year)}</span>` : ''}
@@ -273,8 +293,6 @@
   }
 
   // Actualiza en el sitio solo las tarjetas cuyos datos acaban de llegar.
-  // Reconstruir todo el grid en cada tanda hacía que la tarjeta bajo el cursor
-  // se recreara y el navegador reiniciara la animación de hover una y otra vez.
   function patchCards(items) {
     items.forEach((item) => {
       const card = cardByItem.get(item);
@@ -282,11 +300,24 @@
     });
   }
 
-  function renderGrid(items) {
-    cardByItem.clear();
+  function wireCard(el, item) {
+    const open = () => goDetail(item);
+    el.addEventListener('click', open);
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+    });
+  }
 
+  // Reconcilia el grid en vez de reconstruirlo entero. Con TMDB llegando en
+  // tandas, applyFilters() puede correr muchas veces por segundo (p. ej. con
+  // una búsqueda activa); si cada corrida hacía grid.innerHTML = ..., TODAS las
+  // tarjetas se destruían y recreaban, y la que estaba bajo el cursor perdía y
+  // recuperaba el :hover en cada tanda — de ahí la animación saltando sin fin.
+  // Acá una tarjeta que ya existe y sigue en su posición no se toca para nada.
+  function renderGrid(items) {
     if (items.length === 0) {
       grid.innerHTML = '';
+      cardByItem.clear();
       empty.style.display = 'block';
       countEl.textContent = 'No se encontraron títulos';
       return;
@@ -295,18 +326,30 @@
     empty.style.display = 'none';
     countEl.textContent = `${items.length} título${items.length !== 1 ? 's' : ''}`;
 
-    grid.innerHTML = items.map((item, idx) => `
-      <div class="catalog-item" data-idx="${idx}" tabindex="0" role="button" aria-label="${escapeHtml(item.title)}">${cardInnerHtml(item)}</div>
-    `).join('');
+    // Tarjetas que ya no deben mostrarse: se quitan del DOM y del mapa
+    const keep = new Set(items);
+    cardByItem.forEach((el, item) => {
+      if (!keep.has(item)) { el.remove(); cardByItem.delete(item); }
+    });
 
-    // Cada card abre la pantalla de detalle
-    grid.querySelectorAll('.catalog-item').forEach((el, idx) => {
-      cardByItem.set(items[idx], el);
-      const open = () => goDetail(items[idx]);
-      el.addEventListener('click', open);
-      el.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
-      });
+    // Inserta lo nuevo y reordena solo lo que cambió de posición
+    let prevEl = null;
+    items.forEach((item, idx) => {
+      let el = cardByItem.get(item);
+      if (!el) {
+        el = document.createElement('div');
+        el.className = 'catalog-item';
+        el.tabIndex = 0;
+        el.setAttribute('role', 'button');
+        el.setAttribute('aria-label', item.title);
+        el.innerHTML = cardInnerHtml(item);
+        wireCard(el, item);
+        cardByItem.set(item, el);
+      }
+      el.dataset.idx = idx;
+      const wanted = prevEl ? prevEl.nextElementSibling : grid.firstElementChild;
+      if (wanted !== el) grid.insertBefore(el, wanted || null);
+      prevEl = el;
     });
   }
 
@@ -430,7 +473,7 @@
   function detailHtml(item) {
     const tmdb = item.tmdb || {};
     const typeLabel = item.type === 'tv' ? 'Serie' : 'Película';
-    const name = tmdb.name || item.title;
+    const name = item.title;   // manda el titulo curado de catalog-data.js, no el de TMDB
     const backdrop = tmdb.backdrop || '';
 
     const meta = [];
@@ -499,7 +542,7 @@
     if (!item.tmdb) {
       views.detail.innerHTML = detailSkeleton();
       views.detail.querySelector('[data-back]').addEventListener('click', () => history.back());
-      const fetched = await searchTMDB(item.title, item.type, item.tmdb);
+      const fetched = await searchTMDB(item.title, item.type, item.tmdbId);
       if (token !== detailToken) return; // el usuario ya navegó a otra cosa
       item.tmdb = fetched;
     }
@@ -664,7 +707,7 @@
 
     section.hidden = false;
     gridEl.innerHTML = matches.map((m, i) => {
-      const name = (m.item.tmdb && m.item.tmdb.name) || m.item.title;
+      const name = m.item.title;
       return `
         <article class="similar-card" data-similar-idx="${i}" tabindex="0" role="button"
                  aria-label="Ver ${escapeHtml(name)}">
@@ -759,7 +802,7 @@
     // El fondo es el frame que el usuario creyó estar por reproducir: el still del
     // episodio si vino de la lista, o el backdrop del título.
     const bg = bgImage || tmdb.backdrop || tmdb.poster || '';
-    const name = tmdb.name || item.title;
+    const name = item.title;   // manda el titulo curado de catalog-data.js, no el de TMDB
     const duration = item.type === 'tv' ? '42:00' : '1:58:00';
 
     views.player.innerHTML = `
@@ -832,7 +875,7 @@
     // reproductor abriría sin frame de fondo. Lo traemos y lo insertamos sin tocar
     // la etapa actual — si el usuario ya le dio play, la carga sigue su curso.
     if (!item.tmdb) {
-      const fetched = await searchTMDB(item.title, item.type, item.tmdb);
+      const fetched = await searchTMDB(item.title, item.type, item.tmdbId);
       item.tmdb = fetched;
       if (!stage.isConnected) return; // el usuario ya navegó a otra cosa
       const t = item.tmdb || {};
@@ -894,17 +937,35 @@
   // ══════════════════════════════════════════════════════════
   function applyFilters() {
     filteredItems = allItems.filter(item => {
-      // Category filter
-      if (activeFilter !== 'all') {
-        const cats = item.category.split(',').map(c => c.trim());
-        if (!cats.includes(activeFilter)) return false;
+      // Tipo: viene de item.type, no de category — así "anime" o "infantil"
+      // (que en category reemplazan a "series"/"peliculas") se pueden combinar
+      // con Series o Películas sin perder de cuál de las dos se trata.
+      if (activeTypeFilter !== 'all') {
+        const wantTv = activeTypeFilter === 'series';
+        if ((item.type === 'tv') !== wantTv) return false;
       }
-      // Search filter
+      // Género (incluye Anime e Infantil)
+      if (activeCategoryFilter !== 'all') {
+        const cats = item.category.split(',').map(c => c.trim());
+        if (!cats.includes(activeCategoryFilter)) return false;
+      }
+      // Búsqueda: por el título que se muestra, por los alias que trae
+      // catalog-data.js (nombre en inglés y original) y por el que devolvió
+      // TMDB. Así "Jeepers Creepers" también aparece buscando "El demonio",
+      // y "El Padrino" buscando "The Godfather".
       if (searchTerm) {
-        const s = searchTerm.toLowerCase();
-        const titleMatch = item.title.toLowerCase().includes(s);
-        const tmdbName = (item.tmdb && item.tmdb.name) ? item.tmdb.name.toLowerCase().includes(s) : false;
-        if (!titleMatch && !tmdbName) return false;
+        const donde = [item.title].concat(item.alt || []);
+        if (item.tmdb && item.tmdb.name) donde.push(item.tmdb.name);
+        const s = plano(searchTerm);
+        if (s) {
+          if (!donde.some(x => plano(x).includes(s))) return false;
+        } else {
+          // El término no deja nada al normalizar: es japonés, coreano, etc.
+          // Se compara en crudo; si no, plano() lo dejaba vacío y el filtro
+          // daba por buenos los 1349 títulos.
+          const bruto = searchTerm.trim().toLowerCase();
+          if (!donde.some(x => String(x).toLowerCase().includes(bruto))) return false;
+        }
       }
       // Year filter (ranges, since exact years arrive progressively from TMDB)
       if (yearFilter !== 'all') {
@@ -927,12 +988,21 @@
     renderGrid(filteredItems);
   }
 
-  // ── Filter tag clicks ──
-  filterTags.forEach(tag => {
+  // ── Filter tag clicks — dos grupos independientes que se combinan con Y ──
+  filterTypeTags.forEach(tag => {
     tag.addEventListener('click', () => {
-      filterTags.forEach(t => t.classList.remove('active'));
+      filterTypeTags.forEach(t => t.classList.remove('active'));
       tag.classList.add('active');
-      activeFilter = tag.dataset.filter;
+      activeTypeFilter = tag.dataset.filter;
+      applyFilters();
+    });
+  });
+
+  filterGenreTags.forEach(tag => {
+    tag.addEventListener('click', () => {
+      filterGenreTags.forEach(t => t.classList.remove('active'));
+      tag.classList.add('active');
+      activeCategoryFilter = tag.dataset.filter;
       applyFilters();
     });
   });
@@ -989,7 +1059,11 @@
     toTop();
 
     // Orden aleatorio en cada carga de página (afecta el orden "Relevancia")
-    allItems = shuffle(CATALOG_DATA.map(item => ({ ...item, tmdb: null })));
+    // OJO: 'tmdb' en catalog-data.js es el ID; aqui la propiedad 'tmdb' pasa a
+    // guardar la ficha ya descargada. Si no se copia el id a 'tmdbId' primero,
+    // el `tmdb: null` lo borra y la consulta se queda sin id (era justo lo que
+    // hacia que la web terminara buscando por titulo).
+    allItems = shuffle(CATALOG_DATA.map(item => ({ ...item, tmdbId: item.tmdb, tmdb: null })));
 
     // Render immediately with empty posters
     filteredItems = allItems;
@@ -1015,7 +1089,7 @@
 
     for (let i = 0; i < allItems.length; i += BATCH_SIZE) {
       const batch = allItems.slice(i, i + BATCH_SIZE);
-      const promises = batch.map(item => searchTMDB(item.title, item.type, item.tmdb));
+      const promises = batch.map(item => searchTMDB(item.title, item.type, item.tmdbId));
       const results = await Promise.all(promises);
 
       results.forEach((tmdbData, idx) => {

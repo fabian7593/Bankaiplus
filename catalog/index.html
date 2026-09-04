@@ -151,24 +151,25 @@
     <button class="search-clear" id="search-clear" aria-label="Limpiar búsqueda" style="display:none;">✕</button>
   </div>
 
-  <!-- Categoría principal -->
+  <!-- Tipo: se combina con la fila de géneros de abajo (p. ej. "Series" + "Comedia") -->
   <div class="filter-row filter-row-type">
     <button class="filter-tag active" data-filter="all">Todos</button>
     <button class="filter-tag" data-filter="series">Series</button>
     <button class="filter-tag" data-filter="peliculas">Películas</button>
-    <button class="filter-tag" data-filter="anime">Anime</button>
-    <button class="filter-tag" data-filter="infantil">Infantil</button>
   </div>
 
   <!-- Género (secundario, más sutil) -->
   <div class="filter-row filter-row-genre">
+    <button class="filter-tag active" data-filter="all">Todos los géneros</button>
     <button class="filter-tag" data-filter="accion">Acción</button>
     <button class="filter-tag" data-filter="comedia">Comedia</button>
-    <button class="filter-tag" data-filter="drama">Drama</button>
-    <button class="filter-tag" data-filter="cienciaficcion">Sci-Fi</button>
     <button class="filter-tag" data-filter="terror">Terror</button>
-    <button class="filter-tag" data-filter="romance">Romance</button>
+    <button class="filter-tag" data-filter="cienciaficcion">Sci-Fi</button>
+    <button class="filter-tag" data-filter="anime">Anime</button>
+    <button class="filter-tag" data-filter="infantil">Infantil</button>
     <button class="filter-tag" data-filter="documental">Documental</button>
+    <button class="filter-tag" data-filter="drama">Drama</button>
+    <button class="filter-tag" data-filter="romance">Romance</button>
   </div>
 
   <!-- Barra de herramientas: filtros avanzados a la izquierda, resultados + orden a la derecha -->
