@@ -63,17 +63,8 @@
   .hero-stats .stat-item:last-child   { border-right: none; }
   .hero-stats .stat-item:nth-child(3) { padding-left: 0; }
 
-  /* Hero form: apilado verticalmente */
-  .hero-form-row { flex-direction: column; }
-  .hero-input {
-    border-right: 1px solid rgba(255,255,255,0.14);
-    border-bottom: none;
-    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
-  }
-  .hero-submit {
-    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
-    padding: 14px 20px;
-  }
+  /* Hero CTA: los dos botones se reparten el ancho disponible */
+  .hero-cta-row { max-width: 100%; }
 
   /* Secciones */
   .section { padding: 70px 24px; }
@@ -143,6 +134,9 @@
   .hero h1 { font-size: clamp(2.4rem, 11vw, 3.2rem); }
   .hero h1 span { font-size: clamp(1.7rem, 8vw, 2.4rem); }
   .hero-desc { font-size: 0.95rem; }
+  /* Hero CTA: botones apilados y a todo el ancho */
+  .hero-cta-row { flex-direction: column; }
+  .hero-register-btn, .hero-catalog-btn { width: 100%; }
   /* Stats en 2x2, tamaño reducido */
   .hero-stats { margin-top: 28px; padding-top: 20px; }
   .stat-number { font-size: 1.7rem; }
@@ -219,16 +213,6 @@
 
   /* CTA */
   .cta-title { font-size: clamp(1.8rem, 8vw, 2.6rem); }
-  .cta-form-row { flex-direction: column; border-radius: var(--radius-sm); }
-  .cta-input {
-    border-right: 1px solid rgba(255,255,255,0.12);
-    border-bottom: none;
-    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
-  }
-  .cta-submit {
-    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
-    padding: 14px 20px;
-  }
   .cta-actions { flex-direction: column; align-items: center; }
   .cta-actions .btn-primary,
   .cta-actions .btn-secondary { width: 100%; max-width: 340px; text-align: center; }

@@ -15,8 +15,8 @@ const CONFIG = {
     name: 'Bankai +',
     tagline: 'Streaming Premium',
     subtitle: 'Streaming sin límites',
-    description: 'Plataforma de streaming premium para Costa Rica y Latinoamérica. Contenido legal, calidad Full HD, soporte en español.',
-    region: 'Costa Rica · LATAM',
+    description: 'Plataforma de streaming premium para Latinoamérica. Contenido legal, calidad Full HD, soporte en español.',
+    region: 'LATAM',
     copyright: '2026 Bankai +. Todos los derechos reservados.',
   },
 

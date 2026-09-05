@@ -5,4 +5,4 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://taurotv.lat/sitemap.xml
+Sitemap: https://www.bankaiplus.com/sitemap.xml

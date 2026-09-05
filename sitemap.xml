@@ -3,7 +3,7 @@
   
   <!-- Página principal — Bankai + -->
   <url>
-    <loc>https://taurotv.lat/</loc>
+    <loc>https://www.bankaiplus.com/</loc>
     <lastmod>2026-08-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -11,7 +11,7 @@
 
   <!-- Catálogo completo -->
   <url>
-    <loc>https://taurotv.lat/catalog</loc>
+    <loc>https://www.bankaiplus.com/catalog</loc>
     <lastmod>2026-08-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>

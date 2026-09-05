@@ -119,14 +119,14 @@
 }
 
 /* ════════════════════════════════════════════════════════
-   FORMULARIO HERO (estilo Disney+)
+   CTA HERO — registro directo (WhatsApp) + acceso al catálogo
 ════════════════════════════════════════════════════════ */
-.hero-form {
+.hero-cta {
   margin-top: 32px;
   animation: fadeSlideUp 0.8s ease 0.3s both;
 }
 
-/* Badge "24 horas gratis" */
+/* Badge "Registrate y obtené 1 mes gratis" */
 .hero-form-trial {
   display: inline-block;
   background: rgba(70,211,105,0.1);
@@ -138,41 +138,22 @@
   text-transform: uppercase;
   padding: 4px 14px;
   border-radius: 20px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
-/* Fila email + botón */
-.hero-form-row {
+/* Fila de botones: Regístrate Gratis + Ver catálogo completo */
+.hero-cta-row {
   display: flex;
-  max-width: 500px;
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  box-shadow: 0 4px 40px rgba(0,0,0,0.5);
+  flex-wrap: wrap;
+  gap: 14px;
+  max-width: 520px;
 }
 
-.hero-input {
-  flex: 1;
-  min-width: 0; /* necesario para que flex funcione bien */
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.14);
-  border-right: none;
-  color: var(--white);
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  padding: 14px 18px;
-  outline: none;
-  transition: background var(--transition), border-color var(--transition);
-  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
-}
-
-.hero-input::placeholder { color: var(--text-muted); }
-.hero-input:focus {
-  background: rgba(255,255,255,0.11);
-  border-color: rgba(255,255,255,0.28);
-}
-
-.hero-submit {
-  flex-shrink: 0;
+.hero-register-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
   background: var(--red);
   color: var(--white);
   border: none;
@@ -181,46 +162,45 @@
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  padding: 14px 22px;
-  cursor: pointer;
+  text-decoration: none;
   white-space: nowrap;
-  transition: background var(--transition), opacity var(--transition);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 15px 26px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  box-shadow: 0 4px 28px var(--red-glow);
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
 }
 
-.hero-submit:hover   { background: var(--red-hover); }
-.hero-submit:disabled { opacity: 0.65; cursor: not-allowed; }
-
-/* Mensaje de error de validación */
-.hero-form-error {
-  color: #FF5561;
-  font-size: 0.78rem;
-  margin-top: 6px;
-  min-height: 1em;
+.hero-register-btn:hover {
+  background: var(--red-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 36px rgba(229,9,20,0.4);
 }
 
 /* Nota "¿Ya tenés cuenta?" */
 .hero-form-note {
-  margin-top: 10px;
+  margin-top: 14px;
   font-size: 0.78rem;
   color: var(--text-muted);
 }
 
 .hero-form-link {
-  color: var(--text-body);
+  color: var(--green);
+  font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 3px;
   transition: color var(--transition);
 }
 .hero-form-link:hover { color: var(--white); }
 
-/* Botón de catálogo — secundario pero visible */
+/* Botón de catálogo — secundario, mismo peso visual que el primario */
 .hero-catalog-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  margin-top: 16px;
-  padding: 10px 20px;
+  flex: 1 1 auto;
+  padding: 15px 24px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: var(--radius-sm);
   background: rgba(255, 255, 255, 0.06);
@@ -230,6 +210,7 @@
   font-weight: 500;
   letter-spacing: 0.02em;
   text-decoration: none;
+  white-space: nowrap;
   transition: background var(--transition), border-color var(--transition), transform var(--transition);
   backdrop-filter: blur(4px);
 }

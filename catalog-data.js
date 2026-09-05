@@ -1,5 +1,5 @@
 // ======================================================================
-// CATALOG_DATA - TauroTV / Bankai+
+// CATALOG_DATA - Bankai+
 // ======================================================================
 // GENERADO por tools/sync.js desde VORTEX_Catalogo_Master.xlsx, pestana "Catalogo ordenado".
 // No editar a mano: los cambios se hacen en el Excel (pestana Catalogo) y se corre tools/sync.js.
@@ -147,7 +147,6 @@ const CATALOG_DATA = [
   { title: 'The Walking Dead: Daryl Dixon', tmdb: 211684, category: 'series, cienciaficcion, accion, drama', type: 'tv', seasons: '1 a 3' },
   { title: 'The Walking Dead: Dead City', tmdb: 194583, category: 'series, accion, drama, cienciaficcion', type: 'tv', seasons: '1 a 2' },
   { title: 'The Walking Dead: World Beyond', tmdb: 94305, category: 'series, drama, cienciaficcion', type: 'tv', seasons: '1 a 2' },
-  { title: 'The Warriors', tmdb: 70783, category: 'series, comedia, drama', type: 'tv', seasons: '1 a 3' },
   { title: 'The Witcher', tmdb: 71912, category: 'series, cienciaficcion, drama, accion', type: 'tv', seasons: '1 a 4' },
   { title: 'Theodosia', tmdb: 139061, category: 'series, accion, cienciaficcion, terror', type: 'tv', seasons: '1' },
   { title: 'This World Can\'t Tear Me Down', tmdb: 214603, category: 'series, comedia, drama', type: 'tv', seasons: '1', alt: ['Este mundo no me hará mala persona', 'Questo mondo non mi renderà cattivo'] },
@@ -158,6 +157,7 @@ const CATALOG_DATA = [
   { title: 'Vikingos: Valhalla', tmdb: 116135, category: 'series, accion, drama', type: 'tv', seasons: '1 a 2', alt: ['Vikings: Valhalla'] },
   { title: 'Vis a Vis', tmdb: 62455, category: 'series, drama, accion', type: 'tv', seasons: '1 a 5', alt: ['Locked Up'] },
   { title: 'Wandavision', tmdb: 85271, category: 'series, cienciaficcion, terror, drama', type: 'tv', seasons: '1', alt: ['Bruja Escarlata y Visión'] },
+  { title: 'Warrior', tmdb: 73544, category: 'series, accion, drama', type: 'tv', seasons: '1 a 3', alt: ['The Warrior', 'The Warriors'] },
   { title: 'Westworld', tmdb: 63247, category: 'series, cienciaficcion, accion', type: 'tv', seasons: '1 a 4' },
   { title: 'Yo Soy Betty, la Fea', tmdb: 16286, category: 'series, drama, comedia', type: 'tv', seasons: '1.0' },
   { title: 'Young Sheldon', tmdb: 71728, category: 'series, comedia, drama', type: 'tv', seasons: '1 a 7', alt: ['El Joven Sheldon'] },
