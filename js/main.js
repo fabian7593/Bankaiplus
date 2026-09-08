@@ -110,52 +110,11 @@ document.addEventListener('DOMContentLoaded', () => {
     startAutoplay();
   })();
 
-  // ── Scroll reveal ────────────────────────────────────────
-  const revealEls = document.querySelectorAll('.reveal');
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        revealObserver.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.08 });
-  revealEls.forEach(el => revealObserver.observe(el));
+  // ── Scroll reveal → js/reveal.js (compartido con las demás
+  //    páginas: descargar, soporte y legal) ─────────────────
 
-  // ── Nav scroll ───────────────────────────────────────────
-  const nav = document.querySelector('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  }, { passive: true });
-
-  // ── Hamburger / menú móvil ───────────────────────────────
-  const hamburger = document.querySelector('.nav-hamburger');
-  const mobileMenu = document.querySelector('.nav-mobile');
-
-  if (hamburger && mobileMenu) {
-    hamburger.addEventListener('click', () => {
-      const isOpen = hamburger.classList.toggle('open');
-      mobileMenu.classList.toggle('open', isOpen);
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-      hamburger.setAttribute('aria-expanded', isOpen);
-    });
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('open');
-        mobileMenu.classList.remove('open');
-        document.body.style.overflow = '';
-        hamburger.setAttribute('aria-expanded', 'false');
-      });
-    });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && hamburger.classList.contains('open')) {
-        hamburger.classList.remove('open');
-        mobileMenu.classList.remove('open');
-        document.body.style.overflow = '';
-        hamburger.setAttribute('aria-expanded', 'false');
-      }
-    });
-  }
+  // ── Nav scroll y menú móvil → js/nav.js (compartido con
+  //    el catálogo y la página de descarga) ────────────────
 
   // ── FAQ accordion ────────────────────────────────────────
   document.querySelectorAll('.faq-question').forEach(question => {
@@ -173,63 +132,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ── Catálogo: botones de categoría cambian las imágenes ──
-  // Lee los datos de CONFIG.catalog[category] y actualiza las 3 cards
-  const catalogGrid = document.getElementById('catalog-grid');
-
-  // Función para actualizar las cards del catálogo
-  function updateCatalogCards(category) {
-    const items = (CONFIG.catalog && CONFIG.catalog[category]) ? CONFIG.catalog[category] : [];
-
-    // Actualizar las 3 cards
-    if (!catalogGrid) return;
-
-    for (let i = 0; i < 3; i++) {
-      const card  = document.getElementById('catalog-card-' + i);
-      if (!card) continue;
-
-      const item = items[i] || { src: '', title: '—', genre: '' };
-
-      // Actualizar título y género
-      const titleEl = card.querySelector('.catalog-card-title');
-      const genreEl = card.querySelector('.catalog-card-genre');
-      if (titleEl) titleEl.textContent = item.title;
-      if (genreEl) genreEl.textContent = item.genre;
-
-      // Actualizar imagen — si hay src, agregar <img>. Si no, quitar.
-      let img = card.querySelector('img');
-
-      if (item.src && item.src.trim() !== '') {
-        // Hay imagen — crear o actualizar
-        if (!img) {
-          img = document.createElement('img');
-          img.alt = '';
-          img.setAttribute('aria-hidden', 'true');
-          card.insertBefore(img, card.firstChild);
-        }
-        img.src = item.src;
-      } else {
-        // No hay imagen — quitar si existe
-        if (img) img.remove();
-      }
-    }
-  }
-
-  // Cargar la categoría inicial (anime) al cargar la página
-  updateCatalogCards('anime');
-
-  // Event listeners para los botones de categoría
-  document.querySelectorAll('.category-tag[data-category]').forEach(tag => {
-    tag.addEventListener('click', () => {
-      // Actualizar estado visual de los tags
-      document.querySelectorAll('.category-tag[data-category]').forEach(t => t.classList.remove('active'));
-      tag.classList.add('active');
-
-      // Obtener la categoría seleccionada y actualizar las cards
-      const category = tag.dataset.category;
-      updateCatalogCards(category);
-    });
-  });
+  // ── Catálogo ──
+  // La landing ya no muestra el preview del catálogo (categorías +
+  // 3 posters): ahora solo tiene el botón que lleva a /catalog, así
+  // que acá no queda nada que manejar. Los datos de CONFIG.catalog
+  // quedan en config.js por si algún día se quiere volver a mostrar.
 
   // ════════════════════════════════════════════════════════
   // BOTONES "REGÍSTRATE GRATIS" (nav, hero + CTA final)

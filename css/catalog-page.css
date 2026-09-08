@@ -36,30 +36,14 @@ body::before {
   opacity: 0.4;
 }
 
-/* ── Nav ── */
-.catalog-nav {
+/* ── Nav ──
+   La barra es la misma de la landing y de /descargar: vive en
+   css/nav.css. Lo único que cambia acá es que va sticky y no
+   fija: en la landing flota sobre el hero, pero en el catálogo
+   el contenido arranca justo debajo, así que tiene que ocupar
+   su lugar en el flujo. */
+nav {
   position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 48px;
-  background: rgba(8, 8, 8, 0.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-}
-
-.logo-mark {
-  width: 44px;
-  height: 44px;
 }
 
 .logo-mark img {
@@ -67,31 +51,6 @@ body::before {
   height: 100%;
   object-fit: contain;
 }
-
-.logo-text {
-  font-family: var(--font-display);
-  font-size: 2rem;
-  letter-spacing: 0.12em;
-  color: var(--white);
-  line-height: 1;
-}
-
-.logo-sub {
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--text-muted);
-  margin-top: 2px;
-}
-
-.back-link {
-  font-size: 0.85rem;
-  color: var(--text-body);
-  transition: color 0.2s;
-}
-.back-link:hover { color: var(--white); }
-/* En la ficha de detalle manda su propio "Volver al catálogo" */
-body.detail-open .back-link { display: none; }
 
 /* ── Header ── */
 .catalog-header {
@@ -539,6 +498,15 @@ body.detail-open .back-link { display: none; }
   text-underline-offset: 3px;
 }
 .catalog-footer a:hover { color: var(--white); }
+
+/* Nota legal — chica, pero presente también acá */
+.catalog-footer-legal {
+  margin: 12px auto 0;
+  max-width: 720px;
+  font-size: 0.7rem;
+  line-height: 1.65;
+  opacity: 0.75;
+}
 /* ══════════════════════════════════════════════════════════
    VISTA DETALLE — pantalla completa estilo plataforma de streaming.
    Nada de scroll anidado: la página entera scrollea, como debe ser.
@@ -1153,21 +1121,30 @@ body.player-open::before { opacity: 0.15; }
   justify-content: center;
 }
 
-.btn-whatsapp {
+/* Botón de registro del paywall — el mismo rojo relleno que
+   "Regístrate Gratis" en el resto del sitio */
+.btn-register {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
-  padding: 12px 26px;
+  justify-content: center;
+  padding: 14px 30px;
   border-radius: var(--radius-sm);
-  background: #25D366;
-  color: #fff;
+  background: var(--red);
+  color: var(--white);
   font-family: var(--font-body);
   font-size: 0.88rem;
-  font-weight: 600;
-  transition: background 0.2s, transform 0.2s;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 24px var(--red-glow);
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
 }
-.btn-whatsapp:hover { background: #20bd5a; transform: translateY(-1px); }
-.btn-whatsapp svg { width: 17px; height: 17px; }
+
+.btn-register:hover {
+  background: var(--red-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(229,9,20,0.4);
+}
 
 /* ── Barra de controles simulada (inerte) ── */
 .player-controls {
@@ -1244,7 +1221,6 @@ body.player-open::before { opacity: 0.15; }
 
 /* ═══ RESPONSIVE ═══ */
 @media (max-width: 900px) {
-  .catalog-nav { padding: 14px 24px; }
   .catalog-header { padding: 60px 24px 24px; gap: 28px; }
   .catalog-controls { padding: 20px 24px 24px; top: 73px; }
   .catalog-main { padding: 24px 24px 60px; }
@@ -1261,9 +1237,6 @@ body.player-open::before { opacity: 0.15; }
 }
 
 @media (max-width: 640px) {
-  .catalog-nav { padding: 12px 16px; }
-  .logo-text { font-size: 1.5rem; }
-  .logo-sub { display: none; }
   .catalog-header { padding: 48px 16px 20px; }
   .catalog-controls { padding: 16px 16px 20px; top: 65px; }
   .catalog-main { padding: 20px 16px 48px; }
@@ -1306,8 +1279,7 @@ body.player-open::before { opacity: 0.15; }
   .player-paywall { padding: 16px 18px; gap: 12px; }
   .player-paywall-text { font-size: 0.84rem; }
   .player-actions { width: 100%; flex-direction: column; }
-  .player-actions .btn-whatsapp,
-  .player-actions .btn-ghost { width: 100%; justify-content: center; }
+  .player-actions .btn-register { width: 100%; justify-content: center; }
   .player-controls { padding: 10px 14px 14px; }
   .player-ctrl { min-width: 34px; height: 34px; padding: 0 7px; }
   .player-ctrl svg { width: 17px; height: 17px; }
@@ -1345,7 +1317,7 @@ body.player-open::before { opacity: 0.15; }
   .similar-poster,
   .btn-play,
   .btn-ghost,
-  .btn-whatsapp,
+  .btn-register,
   .player-bigplay,
   .player-bg,
   .player-stage::after,

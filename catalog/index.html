@@ -85,23 +85,46 @@
 
   <!-- CSS base del sitio -->
   <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/nav.css">
   <link rel="stylesheet" href="../css/catalog-page.css">
   <link rel="stylesheet" href="../css/floating-btns.css">
 </head>
 <body>
 
-<!-- ── Nav simplificada ── -->
-<nav class="catalog-nav" aria-label="Navegación">
+<!-- ── Nav — la misma de la landing y de /descargar ── -->
+<nav aria-label="Navegación principal">
   <a href="../index.html" class="logo" aria-label="Bankai + — inicio">
-    <div class="logo-mark">
+    <div class="logo-mark" aria-hidden="true">
       <img src="../images/logo/logo.svg" alt="Bankai + Logo">
     </div>
     <div>
       <div class="logo-text">Bankai +</div>
-      <div class="logo-sub">Catálogo</div>
+      <div class="logo-sub">Streaming Premium</div>
     </div>
   </a>
-  <a href="../index.html" class="back-link">← Volver al inicio</a>
+
+  <ul class="nav-links" role="list">
+    <li><a href="../index.html">Inicio</a></li>
+    <li><a href="./" aria-current="page">Catálogo</a></li>
+    <li><a href="../index.html#pricing">Planes</a></li>
+    <li><a href="../descargar">Descargar App</a></li>
+    <li><a href="../soporte">Soporte</a></li>
+    <li><a href="https://app.vortexvip.org/register?code=hMXSHQE8P4" class="nav-cta" target="_blank" rel="noopener">1 Mes Gratis x Registro</a></li>
+  </ul>
+
+  <button class="nav-hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-mobile">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Menú móvil overlay -->
+<nav class="nav-mobile" id="nav-mobile" aria-label="Menú móvil">
+  <a href="../index.html">Inicio</a>
+  <a href="./" aria-current="page">Catálogo</a>
+  <a href="../index.html#pricing">Planes</a>
+  <a href="../descargar">Descargar App</a>
+  <a href="../soporte">Soporte</a>
+  <a href="https://app.vortexvip.org/register?code=hMXSHQE8P4" class="nav-cta-mobile" target="_blank" rel="noopener">1 Mes Gratis x Registro</a>
 </nav>
 
 <!-- ══════════════════════════════════════════════════════════
@@ -230,7 +253,13 @@
 
 <!-- ── Footer mini ── -->
 <footer class="catalog-footer">
-  <p>© 2026 Bankai + · <a href="../index.html">Volver al inicio</a> · <a href="../index.html#pricing">Ver planes</a></p>
+  <p>© 2026 Bankai + · <a href="../index.html">Volver al inicio</a> · <a href="../index.html#pricing">Ver planes</a> · <a href="../descargar">Descargar app</a> · <a href="../soporte">Soporte</a> · <a href="../legal">Aviso legal</a></p>
+  <p class="catalog-footer-legal">
+    Este catálogo es de referencia: el sitio no aloja ni transmite contenido audiovisual. El contenido
+    se reproduce desde servidores de terceros y sus derechos pertenecen a sus titulares; ni Bankai + ni
+    la plataforma tecnológica VortexVIP asumen responsabilidad por dicho material.
+    <a href="../legal">Aviso legal completo</a>
+  </p>
 </footer>
 
 </div><!-- /#view-catalog -->
@@ -275,6 +304,7 @@
 </div>
 
 <!-- Scripts -->
+<script src="../js/nav.js"></script>
 <script src="../catalog-data.js"></script>
 <script src="../js/catalog-count.js"></script>
 <script src="../js/floating-btns.js"></script>

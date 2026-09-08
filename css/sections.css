@@ -207,6 +207,30 @@
 }
 
 /* ── Botón de catálogo completo ── */
+/* ── Acceso al catálogo ──
+   En la landing ya no se muestra el catálogo: solo el botón que
+   lleva a /catalog, arriba a la derecha del preview, para que quede
+   a la vista mientras se mira el video. */
+.video-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.video-head-text { min-width: 0; }
+.video-head-text .section-subtitle { margin-bottom: 0; }
+
+/* El rojo relleno sale de .btn-primary (el mismo de "Regístrate
+   Gratis"); acá solo se agranda un poco y no se deja partir. */
+.catalog-access-btn {
+  padding: 18px 40px;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
 .catalog-cta {
   display: flex;
   justify-content: center;

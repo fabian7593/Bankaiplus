@@ -1,0 +1,20 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>p</title><style>html,body{margin:0;background:#000}iframe{border:0;display:block}</style></head><body>
+<iframe id="f" src="/catalog/" width="1400" height="800"></iframe>
+<script>
+var f=document.getElementById('f');
+f.addEventListener('load',function(){
+  var n=0, t=setInterval(function(){
+    var d=f.contentDocument, card=d.querySelector('.catalog-item');
+    if(card){ clearInterval(t); card.click();
+      setTimeout(function(){ var p=d.querySelector('.btn-play'); if(p) p.click(); },1500);
+      setTimeout(function(){
+        var b=d.querySelector('.btn-register');
+        var pw=d.querySelector('.player-paywall');
+        document.title=(b?('boton w='+Math.round(b.getBoundingClientRect().width)+' h='+Math.round(b.getBoundingClientRect().height)):'sin boton')
+          +' | paywall visible='+(pw? getComputedStyle(pw).display+'/'+ (pw.offsetParent!==null) :'no');
+      },7000);
+    }
+    if(++n>60) clearInterval(t);
+  },200);
+});
+</script></body></html>

@@ -182,3 +182,60 @@ nav.scrolled {
   font-family: var(--font-display);
   font-size: 1.6rem !important;
 }
+
+/* ── Pestaña de la página en la que estás ──
+   La rayita roja debajo del tab actual (catálogo, descargar app...) */
+.nav-links a[aria-current="page"],
+.nav-mobile a[aria-current="page"] {
+  color: var(--white);
+  position: relative;
+}
+
+.nav-links a[aria-current="page"]::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -7px;
+  height: 2px;
+  background: var(--red);
+  border-radius: 2px;
+}
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE DE LA NAV
+   Vive acá y no en responsive.css para que cualquier página
+   que cargue nav.css tenga la barra completa y se vea igual.
+══════════════════════════════════════════════════════════ */
+
+/* ── 1200px: se aprieta un poco para que los 6 items entren
+      en una sola línea hasta los 900px ── */
+@media (max-width: 1200px) {
+  nav { padding: 18px 32px; }
+  .nav-links { gap: 22px; }
+  .nav-links a { font-size: 0.78rem; letter-spacing: 0.06em; }
+  .nav-cta { padding: 8px 15px !important; font-size: 0.74rem !important; }
+  .logo-mark { width: 52px; height: 52px; }
+  .logo-text { font-size: 1.7rem; }
+}
+
+/* ── 900px: pasa a hamburger ── */
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+}
+
+/* ── 640px: móvil ── */
+@media (max-width: 640px) {
+  nav { padding: 14px 20px; }
+  .logo-text { font-size: 1.6rem; }
+  .logo-sub { display: none; }
+}
+
+/* ── 400px: móvil chico ── */
+@media (max-width: 400px) {
+  nav { padding: 12px 16px; }
+  .logo-mark { width: 42px; height: 42px; }
+  .logo-text { font-size: 1.4rem; }
+}

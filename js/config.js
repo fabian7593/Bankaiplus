@@ -28,6 +28,16 @@ const CONFIG = {
     telegram: 'https://t.me/TUCANAL',
   },
 
+  // ── DESCARGA DE LA APP (página /descargar) ──────────────
+  // Los dos botones de descarga salen de acá. Es el único lugar
+  // donde hay que pegar las URLs.
+  // Si alguna queda vacía (''), ese botón cae automáticamente a
+  // WhatsApp pidiendo el link — nunca queda un botón muerto.
+  downloads: {
+    playStore: '',   // ← link de Google Play (https://play.google.com/store/apps/details?id=...)
+    apk:       '',   // ← TinyURL del APK     (https://tinyurl.com/...)
+  },
+
   // ── NOMBRES DE PLANES (para mensajes de WhatsApp) ───────
   plans: {
     basic:    'Basic (1 pantalla)',

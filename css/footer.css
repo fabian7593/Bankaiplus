@@ -10,6 +10,31 @@ footer {
   padding-right: max(48px, calc((100% - var(--max-width)) / 2 + 48px));
 }
 
+/* ── Nota legal ──
+   Va arriba del footer en todas las páginas: chica, pero siempre
+   presente. El texto completo vive en /legal. */
+.footer-disclaimer {
+  font-size: 0.72rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 920px;
+  margin-bottom: 26px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.footer-disclaimer strong { color: var(--text-body); font-weight: 600; }
+
+.footer-disclaimer a {
+  color: var(--text-body);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+  transition: color var(--transition);
+}
+
+.footer-disclaimer a:hover { color: var(--white); }
+
 .footer-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
