@@ -195,6 +195,149 @@
 
 .dl-inline-link:hover { color: var(--white); }
 
+/* ── Vía 3: Downloader (Fire TV / TV Box) ──
+   Deliberadamente más callado que los dos botones: es una alternativa,
+   no una tercera opción al mismo nivel. */
+.dl-downloader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px 12px 18px;
+  border-radius: var(--radius-md);
+  background: rgba(255,255,255,0.02);
+  border: 1px dashed rgba(255,255,255,0.16);
+}
+
+.dl-downloader-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: var(--text-muted);
+}
+
+.dl-downloader-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.dl-downloader-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--cream);
+}
+
+.dl-downloader-title em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--white);
+}
+
+.dl-downloader-sub {
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+
+/* El código es el dato importante de esta fila: se lee de lejos y se
+   copia de un toque */
+.dl-code-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  flex-shrink: 0;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+
+.dl-code-btn:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.34);
+}
+
+.dl-code-btn:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 3px;
+}
+
+.dl-code-val {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--white);
+  font-variant-numeric: tabular-nums;
+}
+
+.dl-code-icon {
+  width: 15px;
+  height: 15px;
+  color: var(--text-muted);
+  transition: color var(--transition);
+}
+
+.dl-code-btn:hover .dl-code-icon { color: var(--white); }
+
+/* Estado "copiado" — lo pone js/download-page.js por 1.6s */
+.dl-code-btn.is-copied {
+  background: rgba(46,160,90,0.16);
+  border-color: rgba(46,160,90,0.5);
+}
+
+.dl-code-btn.is-copied .dl-code-val { font-size: 0.8rem; letter-spacing: 0.04em; }
+.dl-code-btn.is-copied .dl-code-icon { display: none; }
+
+/* ── Aviso de código de servidor + deslinde legal ──
+   Tiene que verse sí o sí (es información legal y operativa), pero sin
+   competirle a los botones: sin fondo fuerte, solo una barra a la izquierda. */
+.dl-server-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 440px;   /* alineado con los botones de arriba */
+  margin-top: 22px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-left: 3px solid rgba(229,9,20,0.55);
+}
+
+.dl-server-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: #FF6169;
+}
+
+.dl-server-note p {
+  font-size: 0.78rem;
+  line-height: 1.65;
+  color: var(--text-body);
+  margin: 0;
+}
+
+.dl-server-note strong { color: var(--cream); font-weight: 600; }
+
+.dl-server-code {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 5px;
+  background: rgba(229,9,20,0.14);
+  border: 1px solid rgba(229,9,20,0.38);
+  color: var(--white);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  font-variant-numeric: tabular-nums;
+}
+
 /* ════════════════════════════════════════════════════════
    MOCKUP DEL HERO — tele + celular
 ════════════════════════════════════════════════════════ */
@@ -614,6 +757,16 @@
   .dl-btn { padding: 14px 18px; gap: 12px; }
   .dl-btn-main { font-size: 0.88rem; }
 
+  /* En móvil la fila del Downloader se apila: el código pasa abajo,
+     a lo ancho, que es como se toca cómodo */
+  .dl-downloader {
+    flex-wrap: wrap;
+    gap: 10px 12px;
+    padding: 14px 16px;
+  }
+  .dl-code-btn { margin-left: 0; width: 100%; justify-content: center; }
+  .dl-server-note { max-width: 100%; margin-top: 18px; }
+
   /* El celular del mockup estorba en pantallas chicas */
   .dl-mock-phone { display: none; }
   .dl-mock-chip:nth-last-child(-n+2) { display: none; }
@@ -626,4 +779,5 @@
 @media (max-width: 400px) {
   .dl-hero { padding: 88px 16px 36px; }
   .dl-btn-arrow { display: none; }
+  .dl-downloader-icon { display: none; }
 }

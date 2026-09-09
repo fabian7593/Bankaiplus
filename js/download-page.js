@@ -1,7 +1,8 @@
 /**
  * BANKAI + — PÁGINA DE DESCARGA (/descargar)
  * ─────────────────────────────────────────────────────────
- * Le pone el link real a los dos botones de descarga leyendo
+ * Le pone el link real a los dos botones de descarga (y el código de
+ * Downloader) leyendo
  * CONFIG.downloads (js/config.js). Es el único lugar donde hay
  * que pegar las URLs.
  *
@@ -42,6 +43,53 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       btnApk.href = whatsappFallback('¡Hola! Quiero el APK de la app de Bankai + ⚔️');
     }
+  }
+
+  // ── Código de Downloader ──────────────────────────
+  // El código sale de CONFIG (si está seteado) y se puede copiar de un
+  // toque. Si el navegador no deja copiar, se selecciona el texto para
+  // que el usuario lo copie a mano — nunca queda sin respuesta.
+  const btnCode = document.getElementById('btn-downloader-code');
+  if (btnCode) {
+    const valEl = btnCode.querySelector('.dl-code-val');
+    const codigo = (dl.downloaderCode || btnCode.dataset.code || '').trim();
+
+    if (codigo) {
+      btnCode.dataset.code = codigo;
+      if (valEl) valEl.textContent = codigo;
+    }
+
+    btnCode.addEventListener('click', () => {
+      const code = btnCode.dataset.code || '';
+      if (!code || !valEl) return;
+
+      const avisarCopiado = () => {
+        if (btnCode.classList.contains('is-copied')) return;
+        valEl.textContent = '¡Copiado!';
+        btnCode.classList.add('is-copied');
+        setTimeout(() => {
+          valEl.textContent = code;
+          btnCode.classList.remove('is-copied');
+        }, 1600);
+      };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(avisarCopiado).catch(seleccionar);
+      } else {
+        seleccionar();
+      }
+
+      // Respaldo: dejar el número seleccionado para copiarlo a mano
+      function seleccionar() {
+        try {
+          const rango = document.createRange();
+          rango.selectNodeContents(valEl);
+          const sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(rango);
+        } catch (e) { /* si tampoco se puede, el código igual está a la vista */ }
+      }
+    });
   }
 
 });

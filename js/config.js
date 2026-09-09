@@ -34,8 +34,17 @@ const CONFIG = {
   // Si alguna queda vacía (''), ese botón cae automáticamente a
   // WhatsApp pidiendo el link — nunca queda un botón muerto.
   downloads: {
-    playStore: '',   // ← link de Google Play (https://play.google.com/store/apps/details?id=...)
-    apk:       '',   // ← TinyURL del APK     (https://tinyurl.com/...)
+    playStore: 'https://play.google.com/store/apps/details?id=org.vortextv.playall',
+    apk:       'https://tinyurl.com/vortex352',
+
+    // Código para la app Downloader (Fire TV Stick, TV Box sin Play Store).
+    // Se muestra en el hero de /descargar con botón de copiar.
+    downloaderCode: '8817175',
+
+    // Nombre real de la app en la tienda y código de servidor que hay que
+    // poner en el login para que apunte a Bankai +.
+    appName: 'Vortex',
+    serverCode: 'TAURO777',
   },
 
   // ── NOMBRES DE PLANES (para mensajes de WhatsApp) ───────

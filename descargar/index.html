@@ -132,30 +132,38 @@
   <div class="dl-hero-inner">
 
     <div class="dl-hero-copy">
-      <div class="section-label" aria-hidden="true">Descargar la app</div>
-
-      <h1 class="dl-title" id="dl-heading">
-        Nuestra app
-        <span>en todas tus pantallas.</span>
-      </h1>
-
-      <!-- Los dos botones de descarga.
-           El href real lo pone js/download-page.js desde CONFIG.downloads.
-           Si todavía no hay link cargado, el botón cae a WhatsApp en vez
-           de quedar muerto. -->
+    
+      <!-- Las tres vías de descarga: Play Store, APK directo y Downloader.
+           Los href y el código los pone js/download-page.js desde
+           CONFIG.downloads. Si todavía no hay link cargado, el botón cae a
+           WhatsApp en vez de quedar muerto. -->
       <div class="dl-actions">
 
-        <a class="dl-btn dl-btn--primary" id="btn-play-store" href="https://wa.me/50661719869" target="_blank" rel="noopener">
+        <a class="dl-btn dl-btn--primary" id="btn-play-store" href="https://play.google.com/store/apps/details?id=org.vortextv.playall" target="_blank" rel="noopener">
           <svg class="dl-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
-          <span class="dl-btn-main">Descargar de Google Play</span>
+          <span class="dl-btn-main">Descargar desde Play Store</span>
           <svg class="dl-btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
 
-        <a class="dl-btn" id="btn-apk" href="https://wa.me/50661719869" target="_blank" rel="noopener">
+        <a class="dl-btn" id="btn-apk" href="https://tinyurl.com/vortex352" target="_blank" rel="noopener">
           <svg class="dl-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           <span class="dl-btn-main">Descargar APK directo</span>
           <svg class="dl-btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
+
+        <!-- Vía 3 — Downloader. No es un botón: en Fire TV o TV Box el
+             usuario no puede "tocar un link", tiene que teclear el código. -->
+        <div class="dl-downloader">
+          <svg class="dl-downloader-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><polyline points="9 8 12 11 15 8"/></svg>
+          <div class="dl-downloader-copy">
+            <span class="dl-downloader-title">¿Fire TV o TV Box? Usá <em>Downloader</em></span>
+            <span class="dl-downloader-sub">Abrí la app Downloader y escribí este código</span>
+          </div>
+          <button type="button" class="dl-code-btn" id="btn-downloader-code" data-code="8817175" aria-label="Copiar el código de Downloader 8817175">
+            <span class="dl-code-val">8817175</span>
+            <svg class="dl-code-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </button>
+        </div>
 
       </div>
 
@@ -163,6 +171,20 @@
         Descarga gratuita ·
         <a href="https://app.vortexvip.org/register?code=hMXSHQE8P4" class="dl-inline-link" target="_blank" rel="noopener">Registrate aquí para obtener cuenta</a>
       </p>
+
+      <!-- Aviso corto: cómo se llama la app en la tienda, cuál es el código
+           de servidor de Bankai + y el deslinde de Vortex. -->
+      <aside class="dl-server-note" aria-label="Código de servidor y aviso legal">
+        <svg class="dl-server-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.2-2.9 7.9-7 9.5-4.1-1.6-7-5.3-7-9.5V6l7-3z"/><polyline points="9 12 11 14 15 10"/></svg>
+        <p>
+          En la tienda la app se llama <strong>Vortex</strong>. Al iniciar sesión,
+          verificá que el <strong>código de servidor</strong> sea
+          <span class="dl-server-code">TAURO777</span>, que es el que corresponde a
+          la marca <strong>Bankai +</strong>. Vortex solo provee el software de
+          reproducción y queda libre de todo reclamo legal sobre el contenido.
+          <a href="../legal" class="dl-inline-link">Ver el aviso legal completo</a>
+        </p>
+      </aside>
     </div>
 
     <!-- Columna visual — mockup de TV + celular -->
@@ -351,7 +373,7 @@
           <span class="dl-step-n">3</span>
           <div>
             <h4>Entrá con tu cuenta</h4>
-            <p>Usuario y contraseña del correo de activación. Listo.</p>
+            <p>Usuario y contraseña del correo de activación, con el código de servidor <strong>TAURO777</strong>. Listo.</p>
           </div>
         </li>
       </ol>
@@ -374,7 +396,7 @@
           <span class="dl-step-n">1</span>
           <div>
             <h4>Descargá el archivo</h4>
-            <p>En Fire TV o TV Box, abrí ese mismo link desde la app <em>Downloader</em>.</p>
+            <p>En Fire TV o TV Box, abrí la app <em>Downloader</em> y escribí el código <strong>8817175</strong>.</p>
           </div>
         </li>
         <li>
@@ -388,7 +410,7 @@
           <span class="dl-step-n">3</span>
           <div>
             <h4>Instalá y entrá</h4>
-            <p>Abrís la app y ponés tu usuario y contraseña. Listo.</p>
+            <p>Abrís la app, ponés el código de servidor <strong>TAURO777</strong> y tu usuario y contraseña. Listo.</p>
           </div>
         </li>
       </ol>
