@@ -23,9 +23,51 @@ const CONFIG = {
   // ── LINKS DE CONTACTO ───────────────────────────────────
   // Número de WhatsApp — solo dígitos con código de país (sin +, sin espacios)
   contact: {
+    // Todos los links de WhatsApp del sitio usan este número (js/config-bind.js)
     whatsappNumber: '50661719869',           // ← cambiá solo este número
-    whatsapp: 'https://wa.me/50661719869',   // se construye automáticamente abajo
-    telegram: 'https://t.me/TUCANAL',
+    whatsapp: 'https://wa.me/50661719869',
+    // Todos los mailto: del sitio y los correos que se muestran usan este
+    email: 'taurotressietes@gmail.com',
+  },
+
+  // ── REDES SOCIALES ─────────────────────────────────
+  // De acá salen los iconos del footer de TODAS las páginas
+  // (los dibuja js/config-bind.js, no hay que tocar ningún HTML).
+  //
+  // Dejá en '' la red que todavía no exista: ese icono simplemente no
+  // se muestra. Nunca queda un enlace muerto en el sitio.
+  // Pegá la URL completa, tal cual la abre el navegador.
+  social: {
+    youtube:   'https://www.youtube.com/@Bankaiplus7',
+    instagram: 'https://www.instagram.com/bankaiplus/',
+    facebook:  'https://www.facebook.com/p/Bankai--61591003693655/',
+    tiktok:    '',   // ej. 'https://www.tiktok.com/@bankaiplus'
+    telegram:  '',   // ej. 'https://t.me/bankaiplus'
+  },
+
+  // ── VIDEOS DEL CANAL DE YOUTUBE ─────────────────────
+  // Alimentan la sección "Preview" del landing (js/videos.js):
+  //   • el PRIMERO de la lista es el que se ve grande al entrar,
+  //   • los demás quedan en la fila de abajo y se reproducen en el
+  //     mismo marco, sin sacar al visitante del sitio.
+  //
+  // Para sumar un video nuevo: copiá el ID del final de su URL de
+  // YouTube — en https://www.youtube.com/watch?v=ABC123 el ID es
+  // ABC123 — y agregá una línea más a la lista.
+  // 'label' es la etiqueta chica que se ve arriba del título (opcional).
+  videos: {
+    channel: 'https://www.youtube.com/@Bankaiplus7',
+    list: [
+      { id: '-e0V4FQoLs0', label: 'Tráiler',   title: 'Bankai+: películas, series, anime y K-Drama en un solo lugar' },
+      { id: 'NDDuFnuI1H8', label: 'Guía',      title: 'Guía rápida: todo lo que podés hacer en la app' },
+      { id: '3shc5TlpUJY', label: 'Empezar',   title: 'Cómo registrarte en Bankai+ y descargar la app' },
+      { id: 'iswfONx8r4I', label: 'Fire TV',   title: 'Cómo instalar Bankai+ en Fire TV Stick con Downloader' },
+      { id: 'AzO7MwMjVUc', label: 'Catálogo',  title: 'El catálogo: más de 1.400 películas, series y anime' },
+      { id: 'KD1WhOdtyjo', label: 'Ajustes',   title: 'Configuración: ajustá la app a tu gusto' },
+      { id: '2BdgzHmYL7g', label: 'Planes',    title: 'Planes: pantallas, perfiles y hasta 3 meses gratis' },
+      { id: '8-hFe6vDVKY', label: 'Soporte',   title: '¿Necesitás ayuda? Así encontrás nuestro soporte' },
+      { id: 'F3gDE5Svz_E', label: 'Resellers', title: 'Ganá dinero vendiendo Bankai+ — Programa Reseller' },
+    ],
   },
 
   // ── DESCARGA DE LA APP (página /descargar) ──────────────
@@ -39,7 +81,7 @@ const CONFIG = {
 
     // Código para la app Downloader (Fire TV Stick, TV Box sin Play Store).
     // Se muestra en el hero de /descargar con botón de copiar.
-    downloaderCode: '8817175',
+    downloaderCode: '9516238',
 
     // Nombre real de la app en la tienda y código de servidor que hay que
     // poner en el login para que apunte a Bankai +.
@@ -131,7 +173,7 @@ const CONFIG = {
 
   // ── ESTADÍSTICAS DEL HERO ───────────────────────────────
   stats: [
-    { number: '1300+', label: 'Títulos' },
+    { number: '1400+', label: 'Títulos' },
     { number: 'HD',   label: 'Calidad Full 1080p' },
     { number: '4',    label: 'Perfiles Family' },
     { number: '24/7', label: 'Soporte' },

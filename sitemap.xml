@@ -33,6 +33,14 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Programa de resellers -->
+  <url>
+    <loc>https://www.bankaiplus.com/resellers</loc>
+    <lastmod>2026-10-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Aviso legal y privacidad -->
   <url>
     <loc>https://www.bankaiplus.com/legal</loc>

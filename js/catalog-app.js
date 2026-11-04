@@ -399,7 +399,7 @@
     currentItem = null;
     detailToken++;
     setView('catalog');
-    if (push) history.pushState({ view: 'catalog' }, '', location.pathname);
+    if (push) history.pushState({ view: 'catalog' }, '', location.pathname + filterQuery());
     // Devolvemos al usuario justo donde estaba mirando el grid
     window.scrollTo({ top: gridScrollY, left: 0, behavior: 'instant' });
   }
@@ -835,7 +835,7 @@
           </div>
 
           <div class="player-paywall" data-paywall>
-            <p class="player-paywall-text">Activá tu cuenta y mirá esto — y todo el catálogo — en Full HD 1080p desde $6 USD al mes.</p>
+            <p class="player-paywall-text">Activá tu cuenta y mirá esto — y todo el catálogo — en Full HD 1080p desde $${(typeof CONFIG !== 'undefined' && CONFIG.pricing && CONFIG.pricing.usd && CONFIG.pricing.usd.basic) || 6} USD al mes.</p>
             <div class="player-actions">
               <a class="btn-register" href="${REGISTRO_URL}" target="_blank" rel="noopener">Registrate y obtené 1 mes gratis</a>
             </div>
@@ -982,6 +982,50 @@
     });
     sortItems(filteredItems);
     renderGrid(filteredItems);
+    syncFilterUrl();
+  }
+
+  // ── Filtros en la URL ──
+  // /catalog/?tipo=series&genero=anime&q=naruto&anio=2020-2026&rating=8&orden=year-desc
+  // Así un correo (o un mensaje) abre el catálogo ya filtrado, y al filtrar la
+  // URL cambia para que se pueda compartir. Solo se aceptan valores que existen
+  // en los botones y listas de la página; lo demás se ignora.
+  function filterQuery() {
+    const params = new URLSearchParams();
+    if (activeTypeFilter !== 'all') params.set('tipo', activeTypeFilter);
+    if (activeCategoryFilter !== 'all') params.set('genero', activeCategoryFilter);
+    if (searchTerm) params.set('q', searchTerm);
+    if (yearFilter !== 'all') params.set('anio', yearFilter);
+    if (ratingFilter !== 'all') params.set('rating', ratingFilter);
+    if (sortOption !== 'relevance') params.set('orden', sortOption);
+    const qs = params.toString();
+    return qs ? `?${qs}` : '';
+  }
+
+  function syncFilterUrl() {
+    // En el detalle o el reproductor la URL es ?v=<título>: esa no se toca
+    const state = history.state || {};
+    if (state.view && state.view !== 'catalog') return;
+    if (new URLSearchParams(location.search).has('v')) return;
+    const next = location.pathname + filterQuery();
+    if (next !== location.pathname + location.search) history.replaceState({ view: 'catalog' }, '', next);
+  }
+
+  function readFiltersFromUrl(params) {
+    const pick = (value, allowed) => (value && allowed.includes(value) ? value : null);
+    const tipo = pick(params.get('tipo'), Array.from(filterTypeTags, t => t.dataset.filter));
+    const genero = pick(params.get('genero'), Array.from(filterGenreTags, t => t.dataset.filter));
+    const anio = pick(params.get('anio'), Array.from(yearFilterEl.options, o => o.value));
+    const rating = pick(params.get('rating'), Array.from(ratingFilterEl.options, o => o.value));
+    const orden = pick(params.get('orden'), Array.from(sortEl.options, o => o.value));
+    const q = (params.get('q') || '').trim().slice(0, 80);
+    if (tipo) { activeTypeFilter = tipo; filterTypeTags.forEach(t => t.classList.toggle('active', t.dataset.filter === tipo)); }
+    if (genero) { activeCategoryFilter = genero; filterGenreTags.forEach(t => t.classList.toggle('active', t.dataset.filter === genero)); }
+    if (anio) { yearFilter = anio; yearFilterEl.value = anio; }
+    if (rating) { ratingFilter = rating; ratingFilterEl.value = rating; }
+    if (orden) { sortOption = orden; sortEl.value = orden; }
+    if (q) { searchTerm = q; searchInput.value = q; searchClear.style.display = 'block'; }
+    return Boolean(tipo || genero || anio || rating || orden || q);
   }
 
   // ── Filter tag clicks — dos grupos independientes que se combinan con Y ──
@@ -1066,8 +1110,11 @@
     renderGrid(filteredItems);
     loading.style.display = 'none';
 
-    // Enlace directo: /catalog/?v=<título>[&play=1] abre esa pantalla al cargar
+    // Filtros que vienen en la URL (?tipo=series&genero=anime…)
     const params = new URLSearchParams(location.search);
+    if (readFiltersFromUrl(params)) applyFilters();
+
+    // Enlace directo: /catalog/?v=<título>[&play=1] abre esa pantalla al cargar
     const deepLink = params.get('v');
     if (deepLink) {
       const item = findItemByTitle(deepLink);

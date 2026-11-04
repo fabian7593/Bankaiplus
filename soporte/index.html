@@ -46,9 +46,12 @@
   <link rel="stylesheet" href="../css/nav.css">
   <link rel="stylesheet" href="../css/sections.css">
   <link rel="stylesheet" href="../css/footer.css">
+  <link rel="stylesheet" href="../css/social.css">
   <link rel="stylesheet" href="../css/responsive.css">
   <link rel="stylesheet" href="../css/info-pages.css">
   <link rel="stylesheet" href="../css/floating-btns.css">
+  <link rel="stylesheet" href="../css/video.css">
+  <link rel="stylesheet" href="../css/video-player.css">
 </head>
 <body>
 
@@ -72,6 +75,7 @@
     <li><a href="../index.html#pricing">Planes</a></li>
     <li><a href="../descargar">Descargar App</a></li>
     <li><a href="./" aria-current="page">Soporte</a></li>
+    <li><a href="../resellers">Resellers</a></li>
     <li><a href="https://app.vortexvip.org/register?code=hMXSHQE8P4" class="nav-cta" target="_blank" rel="noopener">1 Mes Gratis x Registro</a></li>
   </ul>
 
@@ -86,6 +90,7 @@
   <a href="../index.html#pricing">Planes</a>
   <a href="../descargar">Descargar App</a>
   <a href="./" aria-current="page">Soporte</a>
+  <a href="../resellers">Resellers</a>
   <a href="https://app.vortexvip.org/register?code=hMXSHQE8P4" class="nav-cta-mobile" target="_blank" rel="noopener">1 Mes Gratis x Registro</a>
 </nav>
 
@@ -118,7 +123,7 @@
         </svg>
         <span class="support-channel-text">
           <span class="support-channel-main">Escribinos por WhatsApp</span>
-          <span class="support-channel-sub">La vía más rápida · 8am a 10pm</span>
+          <span class="support-channel-sub">La vía más rápida · 8am a 10pm (hora de Centroamérica)</span>
         </span>
       </a>
 
@@ -128,7 +133,7 @@
         </svg>
         <span class="support-channel-text">
           <span class="support-channel-main">Escribinos por correo</span>
-          <span class="support-channel-sub">taurotressietes@gmail.com</span>
+          <span class="support-channel-sub" data-cfg="contact.email">taurotressietes@gmail.com</span>
         </span>
       </a>
     </div>
@@ -143,6 +148,15 @@
   <div class="support-head">
     <div class="section-label" aria-hidden="true">Soluciones rápidas</div>
     <h2 class="section-title" id="sol-heading">Probá esto primero.<br><em>Toma un minuto.</em></h2>
+  </div>
+
+  <!-- El video de soporte del canal. Solo el ID: el título sale
+       de CONFIG.videos.list (js/config.js). -->
+  <div class="page-videos page-videos--solo reveal">
+    <div class="video-frame">
+      <div class="yt-player" data-yt="8-hFe6vDVKY"></div>
+      <div class="video-glow" aria-hidden="true"></div>
+    </div>
   </div>
 
   <div class="support-grid reveal">
@@ -270,7 +284,7 @@
       </header>
       <ol class="support-steps">
         <li>Buscala primero en el catálogo: puede que ya esté con otro nombre.</li>
-        <li>Si no está, pedila por WhatsApp con el <strong>título y el año</strong>.</li>
+        <li>Si no está, pedila por WhatsApp con el <strong>título y el año</strong>: cada mes podés pedir un título nuevo.</li>
         <li>La subimos apenas la conseguimos, sin costo extra.</li>
       </ol>
       <a class="support-card-action" href="../catalog">
@@ -323,7 +337,7 @@
   <div class="support-facts reveal">
     <p class="trust-label">Cómo trabajamos</p>
     <div class="support-facts-row">
-      <div class="support-fact"><span class="support-fact-value">8am – 10pm</span><span class="support-fact-label">Horario de soporte</span></div>
+      <div class="support-fact"><span class="support-fact-value">8am – 10pm</span><span class="support-fact-label">Hora de Centroamérica</span></div>
       <div class="support-fact"><span class="support-fact-value">&lt; 30 min</span><span class="support-fact-label">Activación tras el pago</span></div>
       <div class="support-fact"><span class="support-fact-value">Español</span><span class="support-fact-label">Atención humana</span></div>
       <div class="support-fact"><span class="support-fact-value">Semanal</span><span class="support-fact-label">Contenido nuevo</span></div>
@@ -352,14 +366,18 @@
         Streaming premium para Latinoamérica.
         Full HD 1080p · Soporte en español · Sin contratos.
       </p>
+      <!-- Redes sociales — los iconos los dibuja js/config-bind.js con
+           CONFIG.social. Para sumar o quitar una red se edita
+           js/config.js, nunca este HTML. -->
+      <div class="footer-social" data-social-links></div>
     </div>
 
     <div class="footer-col">
       <h4>Planes</h4>
       <ul>
-        <li><a href="../index.html#pricing">Basic — $6 USD/mes</a></li>
-        <li><a href="../index.html#pricing">Standard — $10 USD/mes</a></li>
-        <li><a href="../index.html#pricing">Family — $13.33 USD/mes</a></li>
+        <li><a href="../index.html#pricing">Basic — $<span data-cfg-price="basic">6</span> USD/mes</a></li>
+        <li><a href="../index.html#pricing">Standard — $<span data-cfg-price="standard">10</span> USD/mes</a></li>
+        <li><a href="../index.html#pricing">Family — $<span data-cfg-price="family">13.33</span> USD/mes</a></li>
       </ul>
     </div>
 
@@ -369,6 +387,15 @@
         <li><a href="../descargar">Descargar app</a></li>
         <li><a href="../descargar#compatibilidad">Dispositivos compatibles</a></li>
         <li><a href="../catalog">Catálogo</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Negocios</h4>
+      <ul>
+        <li><a href="../resellers">Programa de resellers</a></li>
+        <li><a href="../resellers#comisiones">Comisiones</a></li>
+        <li><a href="../resellers#calculadora">Calculadora de ganancias</a></li>
       </ul>
     </div>
 
@@ -419,8 +446,11 @@
   </a>
 </div>
 
+<script src="../js/config.js"></script>
+<script src="../js/config-bind.js"></script>
 <script src="../js/nav.js"></script>
 <script src="../js/reveal.js"></script>
 <script src="../js/floating-btns.js"></script>
+<script src="../js/videos.js"></script>
 </body>
 </html>
