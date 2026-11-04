@@ -53,7 +53,6 @@ body::before {
   padding-left: max(48px, calc((100% - var(--max-width)) / 2 + 48px));
   padding-right: max(48px, calc((100% - var(--max-width)) / 2 + 48px));
 }
-}
 
 /* ── Encabezados de sección ── */
 .section-label {

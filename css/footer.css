@@ -37,8 +37,12 @@ footer {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 48px;
+  /* Marca + 4 columnas (Planes · App · Negocios · Ayuda).
+     El gap bajó de 48 a 36px cuando entró Negocios: con 48 las
+     columnas quedaban muy flacas y "Calculadora de ganancias"
+     se partía en tres líneas. */
+  grid-template-columns: 1.8fr 1fr 1fr 1fr 1fr;
+  gap: 36px;
   padding-bottom: 48px;
   border-bottom: 1px solid rgba(255,255,255,0.05);
   margin-bottom: 30px;
@@ -114,3 +118,7 @@ footer {
   color: var(--text-muted);
 }
 
+/* ── Redes sociales ──
+   La fila de iconos y sus colores se mudaron a css/social.css, que
+   cargan las seis páginas (el footer del catálogo tiene su propio
+   estilo y no carga este archivo). */

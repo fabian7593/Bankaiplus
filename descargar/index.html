@@ -40,7 +40,7 @@
     "@type": "SoftwareApplication",
     "name": "Bankai +",
     "applicationCategory": "MultimediaApplication",
-    "operatingSystem": "Android 5.0+, Android TV 7.0+, Google TV",
+    "operatingSystem": "Android 7.0+, Android TV 7.0+, Google TV",
     "description": "App para ver el catálogo de Bankai + en Full HD 1080p en Android TV, celulares, tablets, pantallas de carro y Smart TV.",
     "inLanguage": "es-419",
     "offers": {
@@ -79,9 +79,12 @@
   <link rel="stylesheet" href="../css/nav.css">
   <link rel="stylesheet" href="../css/sections.css">
   <link rel="stylesheet" href="../css/footer.css">
+  <link rel="stylesheet" href="../css/social.css">
   <link rel="stylesheet" href="../css/responsive.css">
   <link rel="stylesheet" href="../css/download-page.css">
   <link rel="stylesheet" href="../css/floating-btns.css">
+  <link rel="stylesheet" href="../css/video.css">
+  <link rel="stylesheet" href="../css/video-player.css">
 </head>
 <body>
 
@@ -105,6 +108,7 @@
     <li><a href="../index.html#pricing">Planes</a></li>
     <li><a href="./" aria-current="page">Descargar App</a></li>
     <li><a href="../soporte">Soporte</a></li>
+    <li><a href="../resellers">Resellers</a></li>
     <li><a href="https://app.vortexvip.org/register?code=hMXSHQE8P4" class="nav-cta" target="_blank" rel="noopener">1 Mes Gratis x Registro</a></li>
   </ul>
 
@@ -120,6 +124,7 @@
   <a href="../index.html#pricing">Planes</a>
   <a href="./" aria-current="page">Descargar App</a>
   <a href="../soporte">Soporte</a>
+  <a href="../resellers">Resellers</a>
   <a href="https://app.vortexvip.org/register?code=hMXSHQE8P4" class="nav-cta-mobile" target="_blank" rel="noopener">1 Mes Gratis x Registro</a>
 </nav>
 
@@ -159,8 +164,8 @@
             <span class="dl-downloader-title">¿Fire TV o TV Box? Usá <em>Downloader</em></span>
             <span class="dl-downloader-sub">Abrí la app Downloader y escribí este código</span>
           </div>
-          <button type="button" class="dl-code-btn" id="btn-downloader-code" data-code="8817175" aria-label="Copiar el código de Downloader 8817175">
-            <span class="dl-code-val">8817175</span>
+          <button type="button" class="dl-code-btn" id="btn-downloader-code" data-code="9516238" aria-label="Copiar el código de Downloader 9516238">
+            <span class="dl-code-val">9516238</span>
             <svg class="dl-code-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
           </button>
         </div>
@@ -177,9 +182,9 @@
       <aside class="dl-server-note" aria-label="Código de servidor y aviso legal">
         <svg class="dl-server-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.2-2.9 7.9-7 9.5-4.1-1.6-7-5.3-7-9.5V6l7-3z"/><polyline points="9 12 11 14 15 10"/></svg>
         <p>
-          En la tienda la app se llama <strong>Vortex</strong>. Al iniciar sesión,
+          En la tienda la app se llama <strong data-cfg="downloads.appName">Vortex</strong>. Al iniciar sesión,
           verificá que el <strong>código de servidor</strong> sea
-          <span class="dl-server-code">TAURO777</span>, que es el que corresponde a
+          <span class="dl-server-code" data-cfg="downloads.serverCode">TAURO777</span>, que es el que corresponde a
           la marca <strong>Bankai +</strong>. Vortex solo provee el software de
           reproducción y queda libre de todo reclamo legal sobre el contenido.
           <a href="../legal" class="dl-inline-link">Ver el aviso legal completo</a>
@@ -290,7 +295,13 @@
       <div class="device-item device-item--soon">
         <svg class="device-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
         <span>iPhone / iPad</span>
-        <span class="device-badge coming">Próximamente</span>
+        <span class="device-badge no">No disponible</span>
+      </div>
+
+      <div class="device-item device-item--soon">
+        <svg class="device-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M7 21h10"/></svg>
+        <span>Roku</span>
+        <span class="device-badge no">No disponible</span>
       </div>
 
     </div>
@@ -310,15 +321,15 @@
       </div>
       <div>
         <h3>Celulares y tablets</h3>
-        <p>Samsung, Xiaomi, Redmi, POCO, Motorola, Realme, OPPO, vivo, Infinix, Tecno y Nokia con Android 5 o superior. Huawei sin Google y tablets Amazon Fire van con el APK.</p>
+        <p>Samsung, Xiaomi, Redmi, POCO, Motorola, Realme, OPPO, vivo, Infinix, Tecno y Nokia con Android 7 o superior. Huawei sin Google y tablets Amazon Fire van con el APK.</p>
       </div>
       <div>
         <h3>Carro y Fire TV</h3>
-        <p>Radios Android 8 a 12 (Teyes, ATOTO, Joying y genéricas 2 DIN). Fire TV Stick Lite, 4K, 4K Max y Cube con el APK.</p>
+        <p>Radios Android 8 a 12 (Teyes, ATOTO, Joying y genéricas 2 DIN). Fire TV Stick Lite, 4K, 4K Max y Cube con el APK (no el Fire TV Stick 4K Select ni los modelos 2026, que traen Vega OS).</p>
       </div>
       <div>
         <h3>Smart TV y Chromecast</h3>
-        <p>LG con webOS y Samsung con Tizen de 2018 en adelante, con la app nativa o haciendo cast. Chromecast 2, 3 y Ultra desde el celular.</p>
+        <p>LG y Samsung: instalás la app en tu celular Android y hacés cast a la tele. Chromecast 2, 3 y Ultra desde el celular.</p>
       </div>
     </div>
   </details>
@@ -338,6 +349,21 @@
   <div class="dl-section-head">
     <div class="section-label" aria-hidden="true">Instalación</div>
     <h2 class="section-title" id="install-heading">Instalarla te toma<br><em>menos de 3 minutos.</em></h2>
+  </div>
+
+  <!-- Los dos videos del canal que corresponden a esta página.
+       El ID es lo único que va acá: el título y la etiqueta salen
+       de CONFIG.videos.list (js/config.js). Hasta que no toquen
+       play solo se carga la carátula, no el reproductor. -->
+  <div class="page-videos reveal">
+    <div class="video-frame">
+      <div class="yt-player" data-yt="3shc5TlpUJY"></div>
+      <div class="video-glow" aria-hidden="true"></div>
+    </div>
+    <div class="video-frame">
+      <div class="yt-player" data-yt="iswfONx8r4I"></div>
+      <div class="video-glow" aria-hidden="true"></div>
+    </div>
   </div>
 
   <div class="dl-guides reveal">
@@ -373,7 +399,7 @@
           <span class="dl-step-n">3</span>
           <div>
             <h4>Entrá con tu cuenta</h4>
-            <p>Usuario y contraseña del correo de activación, con el código de servidor <strong>TAURO777</strong>. Listo.</p>
+            <p>Usuario y contraseña del correo de activación, con el código de servidor <strong data-cfg="downloads.serverCode">TAURO777</strong>. Listo.</p>
           </div>
         </li>
       </ol>
@@ -396,7 +422,7 @@
           <span class="dl-step-n">1</span>
           <div>
             <h4>Descargá el archivo</h4>
-            <p>En Fire TV o TV Box, abrí la app <em>Downloader</em> y escribí el código <strong>8817175</strong>.</p>
+            <p>En Fire TV o TV Box, abrí la app <em>Downloader</em> y escribí el código <strong data-cfg="downloads.downloaderCode">9516238</strong>.</p>
           </div>
         </li>
         <li>
@@ -410,7 +436,7 @@
           <span class="dl-step-n">3</span>
           <div>
             <h4>Instalá y entrá</h4>
-            <p>Abrís la app, ponés el código de servidor <strong>TAURO777</strong> y tu usuario y contraseña. Listo.</p>
+            <p>Abrís la app, ponés el código de servidor <strong data-cfg="downloads.serverCode">TAURO777</strong> y tu usuario y contraseña. Listo.</p>
           </div>
         </li>
       </ol>
@@ -422,7 +448,7 @@
   <div class="dl-reqs reveal">
     <p class="trust-label">Requisitos mínimos</p>
     <div class="dl-reqs-row">
-      <div class="dl-req"><span class="dl-req-value">Android 5.0+</span><span class="dl-req-label">Celulares y tablets</span></div>
+      <div class="dl-req"><span class="dl-req-value">Android 7.0+</span><span class="dl-req-label">Celulares y tablets</span></div>
       <div class="dl-req"><span class="dl-req-value">Android TV 7.0+</span><span class="dl-req-label">Teles y TV Box</span></div>
       <div class="dl-req"><span class="dl-req-value">2 GB RAM</span><span class="dl-req-label">Memoria del equipo</span></div>
       <div class="dl-req"><span class="dl-req-value">30 Mbps</span><span class="dl-req-label">Internet para Full HD</span></div>
@@ -469,9 +495,12 @@
         <div class="faq-answer" role="region">
           <div class="faq-answer-inner">
             1️⃣ Instalá la app gratuita <strong>Downloader</strong> desde la tienda de Amazon.
-            <br>2️⃣ Andá a <em>Ajustes → My Fire TV → Opciones de desarrollador</em> y activá <strong>Instalar apps desconocidas</strong> para Downloader.
-            <br>3️⃣ Abrí Downloader, pegá el link del APK y bajalo.
-            <br>4️⃣ Instalá y entrá con tu usuario.
+            <br>2️⃣ Andá a <em>Ajustes → My Fire TV</em>. Si no ves <em>Opciones de desarrollador</em>, entrá a <em>Acerca de</em> y pulsá 7 veces el nombre de tu Fire TV.
+            <br>3️⃣ En <em>Opciones de desarrollador</em>, activá <strong>Instalar apps desconocidas</strong> para Downloader.
+            <br>4️⃣ Abrí Downloader y escribí el código <strong data-cfg="downloads.downloaderCode">9516238</strong>.
+            <br>5️⃣ Instalá y entrá con tu usuario y contraseña, o con el código desde tu celular.
+            <br><br>
+            Funciona en Fire TV Stick con Fire OS 6, 7 u 8 (Lite, 3.ª generación, 4K, 4K Max y Cube). No funciona en el Fire TV Stick 4K Select ni en los modelos 2026, que traen Vega OS.
           </div>
         </div>
       </div>
@@ -483,7 +512,7 @@
         </button>
         <div class="faq-answer" role="region">
           <div class="faq-answer-inner">
-            Sí. En LG (webOS) y Samsung (Tizen) de 2018 en adelante usás la app nativa para Smart TV. Y en cualquier tele con Chromecast, lo mandás desde el celular. Si tu tele es más vieja, un TV Box Android o un Chromecast económico la deja lista.
+            Sí. En LG y Samsung instalás la app en tu celular Android y hacés cast a la tele. En cualquier tele con Chromecast, lo mandás desde el celular. Si tu tele no tiene cast, un TV Box Android o un Chromecast económico la deja lista.
           </div>
         </div>
       </div>
@@ -495,7 +524,7 @@
         </button>
         <div class="faq-answer" role="region">
           <div class="faq-answer-inner">
-            Todavía no. La versión para iPhone y iPad está en camino, igual que la versión web para ver desde el navegador. Mientras tanto, en casa lo resolvés con un Chromecast o un TV Box Android.
+            No. Bankai + no tiene app para iPhone, iPad ni Apple TV, y tampoco para Roku. La versión web para ver desde el navegador viene en camino. Mientras tanto, en casa lo resolvés con un celular Android, un Chromecast o un TV Box Android.
           </div>
         </div>
       </div>
@@ -563,14 +592,18 @@
         Streaming premium para Latinoamérica.
         Full HD 1080p · Soporte en español · Sin contratos.
       </p>
+      <!-- Redes sociales — los iconos los dibuja js/config-bind.js con
+           CONFIG.social. Para sumar o quitar una red se edita
+           js/config.js, nunca este HTML. -->
+      <div class="footer-social" data-social-links></div>
     </div>
 
     <div class="footer-col">
       <h4>Planes</h4>
       <ul>
-        <li><a href="../index.html#pricing">Basic — $6 USD/mes</a></li>
-        <li><a href="../index.html#pricing">Standard — $10 USD/mes</a></li>
-        <li><a href="../index.html#pricing">Family — $13.33 USD/mes</a></li>
+        <li><a href="../index.html#pricing">Basic — $<span data-cfg-price="basic">6</span> USD/mes</a></li>
+        <li><a href="../index.html#pricing">Standard — $<span data-cfg-price="standard">10</span> USD/mes</a></li>
+        <li><a href="../index.html#pricing">Family — $<span data-cfg-price="family">13.33</span> USD/mes</a></li>
         <li><a href="../index.html#pricing">Planes semestral y anual</a></li>
       </ul>
     </div>
@@ -581,6 +614,15 @@
         <li><a href="#compatibilidad">Dispositivos compatibles</a></li>
         <li><a href="#instalacion">Cómo instalar</a></li>
         <li><a href="../catalog">Catálogo</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Negocios</h4>
+      <ul>
+        <li><a href="../resellers">Programa de resellers</a></li>
+        <li><a href="../resellers#comisiones">Comisiones</a></li>
+        <li><a href="../resellers#calculadora">Calculadora de ganancias</a></li>
       </ul>
     </div>
 
@@ -638,10 +680,12 @@
 
 <!-- Scripts — config primero -->
 <script src="../js/config.js"></script>
+<script src="../js/config-bind.js"></script>
 <script src="../js/nav.js"></script>
 <script src="../js/reveal.js"></script>
 <script src="../js/main.js"></script>
 <script src="../js/download-page.js"></script>
 <script src="../js/floating-btns.js"></script>
+<script src="../js/videos.js"></script>
 </body>
 </html>

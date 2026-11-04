@@ -208,7 +208,7 @@ nav.scrolled {
    que cargue nav.css tenga la barra completa y se vea igual.
 ══════════════════════════════════════════════════════════ */
 
-/* ── 1200px: se aprieta un poco para que los 6 items entren
+/* ── 1200px: se aprieta un poco para que los 7 items entren
       en una sola línea hasta los 900px ── */
 @media (max-width: 1200px) {
   nav { padding: 18px 32px; }
@@ -217,6 +217,19 @@ nav.scrolled {
   .nav-cta { padding: 8px 15px !important; font-size: 0.74rem !important; }
   .logo-mark { width: 52px; height: 52px; }
   .logo-text { font-size: 1.7rem; }
+}
+
+/* ── 1060px: último apretón antes del hamburger.
+      Hace falta desde que se sumó "Resellers": con 6 links + el CTA
+      la fila se partía en dos entre 900 y 1060px. ── */
+@media (max-width: 1060px) {
+  nav { padding: 18px 24px; }
+  .nav-links { gap: 15px; }
+  .nav-links a { font-size: 0.72rem; letter-spacing: 0.03em; }
+  .nav-cta { padding: 8px 11px !important; font-size: 0.68rem !important; }
+  .logo-mark { width: 46px; height: 46px; }
+  .logo-text { font-size: 1.5rem; }
+  .logo-sub { font-size: 0.56rem; }
 }
 
 /* ── 900px: pasa a hamburger ── */

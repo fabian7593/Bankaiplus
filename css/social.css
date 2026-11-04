@@ -1,0 +1,117 @@
+/**
+ * ============================================================
+ * BANKAI + — REDES SOCIALES
+ * ============================================================
+ * Vive aparte de css/footer.css a propósito: el footer del
+ * catálogo es otro (una sola línea centrada, con sus propios
+ * estilos en catalog-page.css) y no carga footer.css. Separando
+ * esto, las seis páginas pueden mostrar la misma fila de redes
+ * sin que ninguna herede un footer que no es el suyo.
+ *
+ * Los iconos los dibuja js/config-bind.js leyendo CONFIG.social:
+ * la red que esté en '' no aparece, así que esta fila crece sola
+ * cuando se le pega una URL nueva en js/config.js. WhatsApp
+ * siempre va al final.
+ *
+ * En hover cada una toma su color de marca: se reconocen de un
+ * vistazo sin tener que leer nada.
+ * ============================================================
+ */
+
+.footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+/* Para footers centrados (el del catálogo). */
+.footer-social--center {
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.social-link {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: color var(--transition), background var(--transition),
+              border-color var(--transition), transform var(--transition);
+}
+
+.social-link svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.social-link:hover,
+.social-link:focus-visible {
+  color: var(--white);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.social-youtube:hover,
+.social-youtube:focus-visible {
+  background: #FF0000;
+  border-color: #FF0000;
+}
+
+.social-instagram:hover,
+.social-instagram:focus-visible {
+  background: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF);
+  border-color: #DD2A7B;
+}
+
+.social-facebook:hover,
+.social-facebook:focus-visible {
+  background: #1877F2;
+  border-color: #1877F2;
+}
+
+.social-tiktok:hover,
+.social-tiktok:focus-visible {
+  background: #000000;
+  border-color: #69C9D0;
+  color: #69C9D0;
+}
+
+.social-telegram:hover,
+.social-telegram:focus-visible {
+  background: #229ED9;
+  border-color: #229ED9;
+}
+
+.social-whatsapp:hover,
+.social-whatsapp:focus-visible {
+  background: #25D366;
+  border-color: #25D366;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .social-link { transition: color var(--transition), background var(--transition); }
+  .social-link:hover,
+  .social-link:focus-visible { transform: none; }
+}
+
+/* ── Cuando el footer ya estiliza sus enlaces ──
+   El footer del catálogo subraya y recolorea todo su <a> (regla
+   .catalog-footer a, en catalog-page.css), y por especificidad le
+   ganaba al icono. Estos iconos no son texto: no llevan subrayado y
+   mandan ellos con su color. */
+.footer-social .social-link {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.footer-social .social-link:hover,
+.footer-social .social-link:focus-visible { color: var(--white); }
+
+.footer-social .social-tiktok:hover,
+.footer-social .social-tiktok:focus-visible { color: #69C9D0; }

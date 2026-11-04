@@ -1,0 +1,653 @@
+/**
+ * BANKAI + — PÁGINA DE RESELLERS (/resellers)
+ * ─────────────────────────────────────────────────────────
+ * Única pantalla B2B del sitio. Usa la misma casa visual que el resto:
+ * negro cinematográfico, ROJO como único acento y verde solo para los ✓.
+ *
+ * Nada de dorado: en este sitio el dorado está definido en variables.css
+ * para el logo, pero no se usa en pantalla. Meterlo acá hacía que la
+ * página pareciera de otro sitio.
+ *
+ * La página tiene un solo foco por sección:
+ *   hero → el titular · modalidades → los dos % · calculadora → el total
+ *
+ * Todo lo propio va con prefijo .rs- para no pisar nada.
+ * La calculadora la maneja js/resellers.js — acá está solo su ropa.
+ */
+
+.rs-page {
+  --rs-wash:  rgba(229,9,20,0.06);
+  --rs-line:  rgba(255,255,255,0.07);
+  --rs-line2: rgba(255,255,255,0.14);
+}
+
+/* Caja interna: el sitio centra a 1400px, pero esta página respira
+   mejor a 1180. Va dentro del .section para no tocar su padding. */
+.rs-in {
+  max-width: 1180px;
+  margin-inline: auto;
+}
+
+/* ── Titulares de la página ──────────────────────────────
+   Bebas grande + segunda línea en serif itálica, el mismo par
+   que usa el hero de la home. */
+.rs-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 5.4vw, 4.4rem);
+  line-height: 0.94;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  margin: 0;
+}
+
+.rs-title--hero { font-size: clamp(2.9rem, 6.4vw, 5.2rem); }
+
+.rs-title .rs-serif {
+  display: block;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  color: var(--cream);
+  opacity: 0.72;
+  margin-top: 10px;
+}
+
+.rs-lede {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-body);
+  max-width: 54ch;
+  margin: 22px 0 0;
+}
+
+.rs-line {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  max-width: 60ch;
+  margin: 14px 0 0;
+}
+
+.rs-num { font-variant-numeric: tabular-nums; }
+
+/* ── Botones ──────────────────────────────────────────────
+   .btn-primary y .btn-secondary salen de base.css. Acá solo
+   el ancho completo en móvil y el ícono de WhatsApp. */
+.rs-wa-icon { width: 17px; height: 17px; flex: none; }
+.rs-page .btn-primary,
+.rs-page .btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* ════════════════════════════════════════════════════════
+   HERO
+════════════════════════════════════════════════════════ */
+.rs-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 136px 48px 0;
+  padding-left:  max(48px, calc((100% - var(--max-width)) / 2 + 48px));
+  padding-right: max(48px, calc((100% - var(--max-width)) / 2 + 48px));
+}
+
+.rs-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 65% 40%, rgba(229,9,20,0.06) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 50% at 5%  85%, rgba(229,9,20,0.05) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 70% at 100% 0%, rgba(80,0,0,0.14)   0%, transparent 60%),
+    linear-gradient(160deg, #080808 0%, #0F0F0F 60%, #080808 100%);
+}
+
+.rs-hero-bg::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 0;
+  width: 3px;
+  background: linear-gradient(to bottom,
+    transparent 0%, var(--red) 30%, var(--red-dim) 70%, transparent 100%);
+  opacity: 0.7;
+}
+
+.rs-hero-inner {
+  position: relative;
+  z-index: 2;
+  animation: fadeSlideUp 0.8s ease 0.1s both;
+}
+
+.rs-hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 36px;
+}
+
+.rs-hero-note {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  margin-top: 20px;
+}
+
+/* tira de datos — la misma de la home */
+.rs-facts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 68px;
+  border-top: 1px solid var(--rs-line);
+  padding-top: 32px;
+}
+
+.rs-fact {
+  padding-right: 24px;
+  border-right: 1px solid var(--rs-line);
+}
+
+.rs-fact:last-child { border-right: 0; }
+
+.rs-fact-n {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  line-height: 1;
+  letter-spacing: 0.03em;
+  color: var(--white);
+  font-variant-numeric: tabular-nums;
+}
+
+.rs-fact-l {
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+/* ════════════════════════════════════════════════════════
+   LAS DOS MODALIDADES — mismo lenguaje que las cards de precios
+════════════════════════════════════════════════════════ */
+.rs-section-alt { background: var(--dark2); }
+
+.rs-modos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  margin-top: 52px;
+  background: var(--rs-line);
+  border: 1px solid var(--rs-line);
+}
+
+.rs-modo {
+  background: var(--dark3);
+  padding: 40px 36px;
+  min-width: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* La recomendada lleva el riel rojo y el lavado, como la card destacada */
+.rs-modo--top {
+  background: linear-gradient(180deg, var(--rs-wash) 0%, transparent 220px), var(--dark3);
+}
+
+.rs-modo--top::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 0;
+  width: 3px;
+  background: linear-gradient(to bottom,
+    transparent 0%, var(--red) 25%, var(--red-dim) 75%, transparent 100%);
+}
+
+.rs-modo-badge {
+  position: absolute;
+  top: 0; right: 28px;
+  transform: translateY(-50%);
+  background: var(--red);
+  color: var(--white);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+
+.rs-modo-name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.1em;
+  color: var(--white);
+  line-height: 1;
+}
+
+.rs-modo-for {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+.rs-modo-pct {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 26px;
+}
+
+.rs-modo-pct b {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 4.4rem;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: var(--white);
+  font-variant-numeric: tabular-nums;
+}
+
+.rs-modo--top .rs-modo-pct b { color: var(--red); }
+
+.rs-modo-pct span { font-size: 0.88rem; color: var(--text-muted); }
+
+.rs-modo-rule {
+  height: 1px;
+  background: var(--rs-line);
+  margin: 26px 0;
+}
+
+.rs-checks {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px;
+  display: grid;
+  gap: 13px;
+}
+
+.rs-checks li {
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  gap: 11px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-body);
+}
+
+.rs-checks svg {
+  width: 14px;
+  height: 14px;
+  margin-top: 5px;
+  color: var(--green);
+}
+
+.rs-checks b { color: var(--cream); font-weight: 600; }
+
+/* el botón se pega abajo para que las dos cards terminen parejas */
+.rs-modo .btn-primary,
+.rs-modo .btn-secondary {
+  width: 100%;
+  margin-top: auto;
+}
+
+/* ════════════════════════════════════════════════════════
+   CALCULADORA
+════════════════════════════════════════════════════════ */
+.rs-calc {
+  display: grid;
+  grid-template-columns: 1.3fr 0.85fr;
+  gap: 28px;
+  margin-top: 48px;
+  align-items: start;
+}
+
+.rs-calc-main { min-width: 0; }
+
+/* selector de modalidad — como las pestañas de facturación de la home */
+.rs-switch {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  background: var(--dark3);
+  border: 1px solid var(--rs-line);
+  border-radius: 999px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.rs-switch button {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  color: var(--text-muted);
+  transition: background var(--transition), color var(--transition);
+}
+
+.rs-switch button:hover { color: var(--white); }
+.rs-switch button[aria-pressed="true"] { background: var(--red); color: var(--white); }
+
+.rs-presets {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.rs-preset {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 7px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid var(--rs-line2);
+  color: var(--text-muted);
+  transition: border-color var(--transition), color var(--transition);
+}
+
+.rs-preset:hover { border-color: rgba(255,255,255,0.35); color: var(--white); }
+.rs-preset[aria-pressed="true"] { border-color: var(--red); color: var(--red); }
+
+.rs-switch button:focus-visible,
+.rs-preset:focus-visible,
+.rs-step button:focus-visible,
+.rs-step input:focus-visible {
+  outline: 2px solid var(--red-hover);
+  outline-offset: 2px;
+}
+
+.rs-plan {
+  border-top: 1px solid var(--rs-line);
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+.rs-plan:first-child { border-top: 0; padding-top: 0; margin-top: 0; }
+
+.rs-plan-h {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.rs-plan-n {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  letter-spacing: 0.08em;
+  color: var(--white);
+}
+
+.rs-plan-n i {
+  font-style: normal;
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  letter-spacing: 0;
+  color: var(--text-muted);
+  margin-left: 10px;
+}
+
+.rs-plan-sub {
+  font-size: 0.85rem;
+  color: var(--white);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* en gris cuando ese plan todavía no suma nada */
+.rs-plan-sub.rs-off { color: var(--text-muted); font-weight: 400; }
+
+.rs-celdas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.rs-celda {
+  background: var(--dark3);
+  border: 1px solid var(--rs-line);
+  border-radius: var(--radius-sm);
+  padding: 13px;
+  min-width: 0;
+}
+
+.rs-celda-l {
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.rs-celda-p {
+  font-size: 0.78rem;
+  color: var(--cream);
+  margin: 5px 0 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.rs-step { display: flex; align-items: center; gap: 7px; }
+
+.rs-step button {
+  width: 32px;
+  height: 32px;
+  flex: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  background: var(--dark4);
+  border: 1px solid var(--rs-line2);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.rs-step button:hover { border-color: var(--red); background: var(--rs-wash); }
+
+.rs-step input {
+  width: 100%;
+  min-width: 0;
+  height: 32px;
+  text-align: center;
+  background: var(--dark);
+  border: 1px solid var(--rs-line2);
+  border-radius: var(--radius-sm);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.rs-step input::-webkit-outer-spin-button,
+.rs-step input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* panel de resultado — el foco de la sección */
+.rs-out {
+  background: linear-gradient(180deg, var(--rs-wash) 0%, transparent 240px), var(--dark3);
+  border: 1px solid var(--rs-line2);
+  border-radius: var(--radius-md);
+  padding: 32px;
+  position: sticky;
+  top: 110px;
+  min-width: 0;
+}
+
+.rs-out-l {
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-weight: 700;
+}
+
+.rs-out-big {
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 5.6vw, 4.2rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  margin: 12px 0 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+.rs-out-note { font-size: 0.85rem; color: var(--text-muted); }
+
+.rs-out-filas {
+  margin-top: 26px;
+  border-top: 1px solid var(--rs-line);
+}
+
+.rs-out-fila {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--rs-line);
+  font-size: 0.86rem;
+}
+
+.rs-out-fila:last-child { border-bottom: 0; }
+.rs-out-fila span { color: var(--text-muted); }
+
+.rs-out-fila b {
+  color: var(--cream);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.rs-out .btn-primary { width: 100%; margin-top: 26px; }
+
+.rs-out-fine {
+  margin-top: 16px;
+  font-size: 0.71rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* ════════════════════════════════════════════════════════
+   PREGUNTAS
+════════════════════════════════════════════════════════ */
+.rs-faq {
+  margin-top: 40px;
+  border-top: 1px solid var(--rs-line);
+}
+
+.rs-faq details { border-bottom: 1px solid var(--rs-line); }
+
+.rs-faq summary {
+  cursor: pointer;
+  padding: 20px 4px;
+  color: var(--white);
+  font-size: 0.96rem;
+  font-weight: 500;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+.rs-faq summary::-webkit-details-marker { display: none; }
+
+.rs-faq summary::after {
+  content: '+';
+  color: var(--red);
+  font-size: 1.3rem;
+  line-height: 1;
+  flex: none;
+}
+
+.rs-faq details[open] summary::after { content: '\2013'; }
+.rs-faq summary:focus-visible { outline: 2px solid var(--red-hover); outline-offset: -2px; }
+
+.rs-faq-a {
+  padding: 0 4px 22px;
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: var(--text-body);
+  max-width: 72ch;
+}
+
+/* ════════════════════════════════════════════════════════
+   CIERRE
+════════════════════════════════════════════════════════ */
+.rs-end { text-align: center; }
+.rs-end .section-label { justify-content: center; }
+.rs-end .section-label::before { display: none; }
+.rs-end .rs-lede { margin-inline: auto; }
+
+.rs-end-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 34px;
+}
+
+/* ════════════════════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════════════════════ */
+@media (max-width: 1200px) {
+  .rs-hero { padding: 120px 32px 0; }
+}
+
+@media (max-width: 1000px) {
+  .rs-calc { grid-template-columns: 1fr; }
+  .rs-out { position: static; }
+  .rs-facts { grid-template-columns: 1fr 1fr; gap: 28px 0; }
+  .rs-fact:nth-child(2) { border-right: 0; }
+  .rs-fact { padding-block: 4px; }
+}
+
+@media (max-width: 900px) {
+  .rs-hero { padding: 104px 24px 0; }
+}
+
+@media (max-width: 860px) {
+  .rs-modos { grid-template-columns: 1fr; }
+  .rs-modo-badge { right: auto; left: 36px; }
+}
+
+@media (max-width: 560px) {
+  .rs-celdas { grid-template-columns: 1fr; }
+  .rs-facts { grid-template-columns: 1fr; }
+  .rs-fact {
+    border-right: 0;
+    border-bottom: 1px solid var(--rs-line);
+    padding-bottom: 18px;
+  }
+  .rs-fact:last-child { border-bottom: 0; }
+  .rs-modo { padding: 32px 24px; }
+  .rs-modo-badge { left: 24px; }
+  .rs-out { padding: 24px; }
+  .rs-hero { padding: 96px 20px 0; }
+  .rs-hero-actions .btn-primary,
+  .rs-hero-actions .btn-secondary,
+  .rs-end-actions .btn-primary,
+  .rs-end-actions .btn-secondary { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rs-hero-inner { animation: none; }
+  .rs-switch button,
+  .rs-preset,
+  .rs-step button { transition: none; }
+}
