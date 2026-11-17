@@ -16,6 +16,13 @@
  *    (YouTube, Instagram, Facebook, TikTok, Telegram) más el de WhatsApp,
  *    que sale de CONFIG.contact.whatsappNumber. La red que esté en ''
  *    no dibuja icono, así que nunca queda un enlace muerto.
+ *  - [data-web-link="/ruta"] → link a la web para ver (CONFIG.web.url):
+ *    si es un <a> le pone href = CONFIG.web.url + ruta; si es otra cosa
+ *    (un <li>), se lo pone al <a> de adentro. Con CONFIG.web.url en ''
+ *    el elemento se esconde entero, así nunca queda un botón a una web
+ *    que no existe.
+ *  - Los links de registro (https://app.vortexvip.org/register...) usan
+ *    CONFIG.registro.url.
  *
  * El HTML conserva los valores escritos como respaldo (se ven si este
  * script no carga), pero los que valen son los de config.js.
@@ -95,10 +102,40 @@
     });
   }
 
+  // ── Web para ver ──
+  // La dirección sin la barra del final: 'https://ver.bankaiplus.com'
+  function baseWeb() {
+    return String((CONFIG.web || {}).url || '').trim().replace(/\/+$/, '');
+  }
+
+  function enlazarWeb() {
+    var base = baseWeb();
+    document.querySelectorAll('[data-web-link]').forEach(function (el) {
+      if (!base) {
+        // Sin web configurada el botón no se muestra (style y no hidden:
+        // las clases de los botones ponen su propio display y le ganarían)
+        el.style.display = 'none';
+        return;
+      }
+      var ruta = el.getAttribute('data-web-link') || '/';
+      if (ruta.charAt(0) !== '/') ruta = '/' + ruta;
+      var link = el.tagName === 'A' ? el : el.querySelector('a');
+      if (link) link.setAttribute('href', base + ruta);
+    });
+  }
+
   function apply() {
     // Las redes van primero: así el link de WhatsApp que se dibuja acá
     // también pasa por el normalizador de números de más abajo.
     dibujarRedes();
+    enlazarWeb();
+
+    var registro = String((CONFIG.registro || {}).url || '').trim();
+    if (registro) {
+      document.querySelectorAll('a[href^="https://app.vortexvip.org/register"]').forEach(function (a) {
+        a.setAttribute('href', registro);
+      });
+    }
 
     var contact = CONFIG.contact || {};
 

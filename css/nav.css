@@ -63,7 +63,7 @@ nav.scrolled {
 /* ── Links de navegación ── */
 .nav-links {
   display: flex;
-  gap: 36px;
+  gap: 26px; /* era 36px: con «Iniciar sesión» la fila no entraba en los 1400px del sitio */
   list-style: none;
   align-items: center;
 }
@@ -93,6 +93,37 @@ nav.scrolled {
   background: var(--red-hover) !important;
   transform: translateY(-1px);
   color: var(--white) !important;
+}
+
+/* ── «Iniciar sesión» (la web para ver, CONFIG.web.url) ──
+   Al lado del CTA rojo, con borde y sin relleno: es para el que ya es
+   cliente y no compite con el registro. Se va solo si no hay web. */
+.nav-links a.nav-login {
+  display: inline-block;
+  padding: 8px 18px;
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: var(--radius-sm);
+  color: var(--white);
+  font-weight: 600;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.nav-links a.nav-login:hover {
+  border-color: var(--white);
+  background: rgba(255,255,255,0.08);
+}
+
+.nav-cta { white-space: nowrap; }
+
+/* Con el teclado, el foco siempre se ve */
+.nav-links a:focus-visible,
+.nav-mobile a:focus-visible,
+.nav-hamburger:focus-visible,
+.logo:focus-visible {
+  outline: 3px solid var(--gold-light);
+  outline-offset: 3px;
 }
 
 /* ── Hamburger (móvil) ── */
@@ -173,6 +204,21 @@ nav.scrolled {
 
 .nav-mobile a:hover { color: var(--red); }
 
+/* «Iniciar sesión» en el menú del celular: con borde, arriba del registro */
+.nav-mobile .nav-login-mobile {
+  margin-top: 20px;
+  padding: 12px 40px;
+  border: 1px solid rgba(240,238,232,0.4);
+  border-radius: var(--radius-sm);
+  font-size: 1.6rem;
+}
+
+.nav-mobile .nav-login-mobile:hover {
+  border-color: var(--red);
+}
+
+.nav-mobile .nav-login-mobile + .nav-cta-mobile { margin-top: 12px; }
+
 .nav-mobile .nav-cta-mobile {
   margin-top: 20px;
   background: var(--red);
@@ -208,35 +254,44 @@ nav.scrolled {
    que cargue nav.css tenga la barra completa y se vea igual.
 ══════════════════════════════════════════════════════════ */
 
-/* ── 1200px: se aprieta un poco para que los 7 items entren
-      en una sola línea hasta los 900px ── */
-@media (max-width: 1200px) {
-  nav { padding: 18px 32px; }
-  .nav-links { gap: 22px; }
+/* ── 1500px: se aprieta un poco. Desde que se sumó «Iniciar sesión»
+      son 6 links + 2 botones y a tamaño completo solo entran de
+      1500px para arriba. ── */
+@media (max-width: 1500px) {
+  .nav-links { gap: 24px; }
   .nav-links a { font-size: 0.78rem; letter-spacing: 0.06em; }
   .nav-cta { padding: 8px 15px !important; font-size: 0.74rem !important; }
-  .logo-mark { width: 52px; height: 52px; }
-  .logo-text { font-size: 1.7rem; }
+  .nav-links a.nav-login { padding: 7px 14px; font-size: 0.74rem; }
 }
 
-/* ── 1060px: último apretón antes del hamburger.
-      Hace falta desde que se sumó "Resellers": con 6 links + el CTA
-      la fila se partía en dos entre 900 y 1060px. ── */
-@media (max-width: 1060px) {
+/* ── 1280px: último apretón antes del hamburger ── */
+@media (max-width: 1280px) {
   nav { padding: 18px 24px; }
   .nav-links { gap: 15px; }
   .nav-links a { font-size: 0.72rem; letter-spacing: 0.03em; }
   .nav-cta { padding: 8px 11px !important; font-size: 0.68rem !important; }
+  .nav-links a.nav-login { padding: 7px 10px; font-size: 0.68rem; }
   .logo-mark { width: 46px; height: 46px; }
   .logo-text { font-size: 1.5rem; }
   .logo-sub { font-size: 0.56rem; }
 }
 
-/* ── 900px: pasa a hamburger ── */
-@media (max-width: 900px) {
+/* ── 1100px: pasa a hamburger (antes era 900px; con «Iniciar sesión»
+      la fila ya no entra entera más angosto que esto) ── */
+@media (max-width: 1100px) {
   nav { padding: 16px 24px; }
   .nav-links { display: none; }
   .nav-hamburger { display: flex; }
+}
+
+/* El menú del celular con poca altura (celular acostado): letra más
+   chica y, si igual no entra, se puede bajar adentro del menú */
+.nav-mobile { overflow-y: auto; justify-content: safe center; }
+@media (max-height: 640px) {
+  .nav-mobile { gap: 2px; padding: 16px 0; }
+  .nav-mobile a { font-size: 1.6rem; padding: 4px 0; }
+  .nav-mobile .nav-login-mobile,
+  .nav-mobile .nav-cta-mobile { margin-top: 8px; padding: 8px 32px; font-size: 1.3rem !important; }
 }
 
 /* ── 640px: móvil ── */

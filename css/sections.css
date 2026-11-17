@@ -508,12 +508,27 @@
   border: 1px solid rgba(255,255,255,0.08);
 }
 
-/* No disponible (iPhone / iPad, Roku) */
+/* No disponible (Roku) */
 .device-badge.no {
   background: rgba(229,9,20,0.06);
   color: rgba(255,130,130,0.8);
   border: 1px solid rgba(229,9,20,0.22);
 }
+
+/* Aclaración chica debajo del nombre («Compu y celular» de la web) */
+.device-note {
+  margin-top: -5px;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+/* Links dentro de las respuestas del FAQ (ej. ver.bankaiplus.com) */
+.faq-answer-inner a {
+  color: var(--gold-light);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.faq-answer-inner a:hover { color: var(--white); }
 
 /* Divisor entre los dos bloques */
 .trust-divider {

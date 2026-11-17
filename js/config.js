@@ -89,6 +89,27 @@ const CONFIG = {
     serverCode: 'TAURO777',
   },
 
+  // ── WEB PARA VER (con el usuario de la app) ─────────────
+  // La web donde los clientes miran desde la compu o el celular, con
+  // el mismo usuario y contraseña de la app. De acá salen:
+  //   • «Iniciar sesión» en la barra de arriba de todas las páginas,
+  //   • «Iniciar sesión y ver» del reproductor del catálogo,
+  //   • «Buscá "X" en la web» del buscador del catálogo.
+  // Si la dejás en '' desaparecen todos esos botones y el catálogo
+  // vuelve a mostrar solo el registro (como antes de la web).
+  // Sin barra al final.
+  web: {
+    url: 'https://ver.bankaiplus.com',
+  },
+
+  // ── REGISTRO CON 1 MES GRATIS ────────────────────────────
+  // El link de «1 Mes Gratis x Registro» de la barra de arriba y del
+  // reproductor del catálogo. js/config-bind.js lo pone en todos los
+  // botones de registro del sitio.
+  registro: {
+    url: 'https://app.vortexvip.org/register?code=hMXSHQE8P4',
+  },
+
   // ── NOMBRES DE PLANES (para mensajes de WhatsApp) ───────
   plans: {
     basic:    'Basic (1 pantalla)',
