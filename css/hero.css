@@ -141,12 +141,70 @@
   margin-bottom: 14px;
 }
 
-/* Fila de botones: Regístrate Gratis + Ver catálogo completo */
+/* Fila de botones: Iniciar sesión (primero, blanco) + Regístrate Gratis con su nota abajo (2026-11-17).
+   Una grilla de columnas iguales: los dos botones del mismo ancho; si «Iniciar sesión» se oculta (sin web
+   configurada) el registro ocupa toda la fila. */
 .hero-cta-row {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  align-items: start;
   gap: 14px;
   max-width: 520px;
+}
+
+/* El botón de registro con «Obtené 1 mes gratis al registrarte» en chiquito debajo */
+.hero-register-col {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 7px;
+  flex: 1 1 0;
+}
+
+/* «Iniciar sesión»: la misma letra y el mismo tamaño que «Regístrate Gratis», pero blanco con letras negras para
+   que sea el primero que se ve (2026-11-17) */
+.hero-login-btn {
+  box-sizing: border-box; /* el mismo ancho que el de registro: el padding cuenta dentro */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 0;
+  background: #ffffff;
+  color: #000000;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  padding: 15px 26px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  box-shadow: 0 4px 28px rgba(255, 255, 255, 0.18);
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+.hero-login-btn:hover {
+  background: #e8e8e8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 36px rgba(255, 255, 255, 0.26);
+}
+
+.hero-login-btn:focus-visible,
+.hero-register-btn:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+}
+
+.hero-register-note {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--green);
+  text-align: center;
+  letter-spacing: 0.02em;
 }
 
 .hero-register-btn {

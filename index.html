@@ -249,12 +249,12 @@
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/nav.css">
-  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/hero.css?v=20261117d">
   <link rel="stylesheet" href="css/sections.css">
   <link rel="stylesheet" href="css/pricing.css">
   <link rel="stylesheet" href="css/footer.css">
   <link rel="stylesheet" href="css/social.css">
-  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/responsive.css?v=20261117d">
   <link rel="stylesheet" href="css/video.css">
   <link rel="stylesheet" href="css/video-player.css">
   <link rel="stylesheet" href="css/floating-btns.css">
@@ -317,17 +317,20 @@
       <span>La mejor calidad en un solo lugar.</span>
     </h1>
 
-    <!-- CTA del hero: registro directo en la app + acceso al catálogo -->
-    <div class="hero-cta" aria-label="Registrate en Bankai +">
-      <div class="hero-form-trial">Registrate y obtené 1 mes gratis · Sin tarjeta · Sin contratos</div>
+    <!-- CTA del hero (2026-11-17): primero «Iniciar sesión» en la web (blanco, el que se ve primero), después el
+         registro directo en la app con el mes gratis en chiquito abajo -->
+    <div class="hero-cta" aria-label="Iniciá sesión o registrate en Bankai +">
       <div class="hero-cta-row">
-        <a href="https://app.vortexvip.org/register?code=hMXSHQE8P4" id="hero-register-btn" class="hero-register-btn" target="_blank" rel="noopener">
-          Regístrate Gratis
+        <!-- data-web-link: la dirección sale de CONFIG.web.url (js/config.js); sin web configurada el botón no se muestra -->
+        <a href="https://ver.bankaiplus.com/" class="hero-login-btn" data-web-link="/">
+          Iniciar sesión
         </a>
-        <a href="catalog" class="hero-catalog-btn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-          Ver catálogo completo
-        </a>
+        <div class="hero-register-col">
+          <a href="https://app.vortexvip.org/register?code=hMXSHQE8P4" id="hero-register-btn" class="hero-register-btn" target="_blank" rel="noopener">
+            Regístrate Gratis
+          </a>
+          <span class="hero-register-note">Obtené 1 mes gratis al registrarte</span>
+        </div>
       </div>
       <p class="hero-form-note">
         ¿Ya tenés cuenta y querés pasarte a un plan pago? <a href="#pricing" class="hero-form-link">Mirá los planes acá →</a>
